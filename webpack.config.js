@@ -30,6 +30,10 @@ module.exports = (options = {}) => ({
         use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
+        test: /\.less$/,
+        use: ["less-loader", "css-loader", "postcss-loader"]
+      },
+      {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
         use: [{
           loader: 'url-loader',
@@ -50,7 +54,7 @@ module.exports = (options = {}) => ({
   ],
   resolve: {
     alias: {
-      '~': resolve(__dirname, 'src')
+      '@': resolve(__dirname, 'src')
     },
     extensions: ['.js', '.vue', '.json', '.css']
   },

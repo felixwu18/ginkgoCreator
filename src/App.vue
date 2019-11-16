@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <!-- <img src="./assets/logo.png">
     <div>
       <el-button @click="startHacking">Start</el-button>
     </div>
+    <div>
+      <router-link to="/about">about</router-link>
+    </div>
+    <div>
+      <router-view msg="我是通过<router-view>传递的数据,上级传给我的"></router-view>
+    </div> -->
+      <router-view msg="我是通过<router-view>传递的数据,上级传给我的" />
   </div>
 </template>
 
@@ -26,5 +33,6 @@ export default {
 #app {
   font-family: Helvetica, sans-serif;
   text-align: center;
+  height: 100vh;
 }
 </style>
