@@ -32,9 +32,6 @@ module.exports = (options = {}) => ({
       {
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
-        options: {
-          sourceMap: true
-        }
       },
       {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,

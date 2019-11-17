@@ -9,20 +9,17 @@
             text-color="#ffffff"
             background-color="#304156"
          >
-            <!-- <router-link
-                    to="/home">
+            <router-link
+                    to="/about/son">
                 <el-menu-item
-                        index="/home"
-                        class="el-menu-li submenu-title-noDropdown"
+                    index="/about/son"
                 >
                     <i class="el-icon-info"></i>
                     <span slot="title">返回首页</span>
                 </el-menu-item>
-            </router-link> -->
-
+            </router-link>
 
             <sidebar-item :routes="routes" ></sidebar-item>
-   <!-- <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" /> -->
         </el-menu>
 
    </div>
@@ -71,7 +68,7 @@ export default {
 
 <style lang="less" scoped>
 @import "~@/styles/sidebar.less";
-.menu-wrapper{
-   padding-top: 20px;
-}
+// .menu-wrapper{
+//    padding-top: 20px;
+// }
 </style>

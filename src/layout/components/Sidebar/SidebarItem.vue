@@ -41,8 +41,9 @@
         :key="index"
         :index="item.path"
         class="el-menu-li submenu-title-noDropdown"
-        @click.native="linkTo(item)">
+        @click.native="linkTo(item.path)">
         <!-- <i :class="item.meta.icon"></i> -->
+        <i class="el-icon-success"></i>
         <span slot="title">{{item.meta.title}}</span>
       </el-menu-item>
     </template>

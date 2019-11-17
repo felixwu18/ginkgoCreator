@@ -12,7 +12,7 @@ export default {
       name: "handleData",
       component: () => import(/** webpackChunkname: 'index*/ "@/views/HandleData.vue"),
       meta: {
-        title: '数据处理',
+        title: '嵌套页面',
       }
     
     },

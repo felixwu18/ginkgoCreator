@@ -18,6 +18,7 @@ export default new VueRouter({
       {
         path:'/',
         component:Layout, //具体的组件
+        redirect: '/about/son',
         children: [
            ...routerList
             //  {
