@@ -1,6 +1,6 @@
 <template>
    <div class="navbar">
-      navbar
+      navbar(预留)
    </div>
 </template>
 
