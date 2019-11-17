@@ -1,7 +1,8 @@
 <template lang="html">
   <div>
     <h2 @click="test">数据处理 Ramda</h2>
-    <!-- <p>{{msg}}</p> -->
+    <p>R.add(2, 3) => {{R.add(2, 3)}}</p>
+    <p>R.add(2)(3) => {{R.add(2)(3)}}</p>
   </div>
 </template>
 
@@ -9,7 +10,8 @@
 import * as R from 'ramda'
 export default {
   data: function() {
-    return {
+    return { 
+      R     
     };
   },
   components: {},
