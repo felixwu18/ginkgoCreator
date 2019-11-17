@@ -71,8 +71,8 @@ export default {
       //     location.href = url
       //   } else {
           location.hash = url
-          this.basePath
-          debugger
+         //  this.basePath
+         //  debugger
       //   }
       }
     },
