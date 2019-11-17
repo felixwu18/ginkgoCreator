@@ -4,14 +4,13 @@ import Layout from "@/layout/index.vue";
 
 Vue.use(VueRouter);
 
-// const routerList = [];
-// function importAll(r) {
-//   r.keys().forEach(key => routerList.push(r(key).default));
-// }
-// importAll(require.context("./modules", false, /\.router\.js/));
-// console.log("routerList");
-// console.log(routerList);
-
+const routerList = [];
+function importAll(r) {
+  r.keys().forEach(key => routerList.push(r(key).default));
+}
+importAll(require.context("./modules", false, /\.router\.js/));
+console.log("routerList");
+console.log(routerList);
 export default new VueRouter({
   //VueRouter路由器
   //配置n个路由
@@ -20,12 +19,17 @@ export default new VueRouter({
         path:'/',
         component:Layout, //具体的组件
         children: [
-//            ...routerList
-             {
-                path: "/about",
-                name: "about",
-                component: () => import(/** webpackChunkname: 'index*/ "@/views/About.vue"),
-             }
+           ...routerList
+            //  {
+            //     path: "/about",
+            //     name: "about",
+            //     component: () => import(/** webpackChunkname: 'index*/ "@/views/About.vue"),
+            //     meta: {
+            //       title: 'about页面',
+            //       id: '1',
+            //     }
+            //  },
+        
        ]
        }
   ]

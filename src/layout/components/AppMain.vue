@@ -1,6 +1,6 @@
 <template>
    <section  class="app-main">
-      app-main
+      app-main welcome!
      <transition name="fade-transform" mode="out-in">
        <keep-alive>
         <router-view msg="我是通过<router-view>传递的数据,上级传给我的" />
