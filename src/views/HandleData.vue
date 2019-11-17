@@ -20,7 +20,7 @@ export default {
   methods: {
      test(){
        this.R
-       debugger
+//        debugger
      }
   }
 };
