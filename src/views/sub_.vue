@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'sub_',
+  name: 'sub_', // 此处为递归要点
   components: {
   },
   props: {

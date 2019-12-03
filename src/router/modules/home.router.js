@@ -15,9 +15,18 @@ export default {
             title: '组件优化',
           }
         
+        },
+        {
+          path: "/home/page",
+          name: "page",
+          component: () => import(/** webpackChunkname: 'index*/ "@/views/pageDesign/index"),
+          meta: {
+            title: '页面设计',
+          }
+        
         }
       ],
       meta: {
-        title: 'home页面',
+        title: '组件类',
       }
 };

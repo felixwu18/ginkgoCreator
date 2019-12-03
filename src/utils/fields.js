@@ -1,0 +1,1 @@
+export const fieldsConfigure = {1: ['realName', 'alias'], 2: ['hobby', 'love']}
