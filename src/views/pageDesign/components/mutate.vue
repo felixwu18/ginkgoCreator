@@ -11,6 +11,9 @@ export default {
       active: { type: Object, default: _ => {} },            
       father: { type: Object, default: _ => {} }           
   },
+  created() {
+    this.father.son = 1
+  },
   data() {
       return {
         

@@ -7,30 +7,42 @@
 </template>
 
 <script>
-import List from "./components/list"
-import Mutate from "./components/mutate"
-import Detail from "./components/detail"
+import List from "./components/list";
+import Mutate from "./components/mutate";
+import Detail from "./components/detail";
 export default {
-  name: 'controlCenter',
+  name: "controlCenter",
   components: {
-     List,
-     Mutate,
-     Detail
+    List,
+    Mutate,
+    Detail
   },
-  data(){
-    return {
-       active: {
-          listActive: true,
-          mutateActive: false,
-          detailActive: false
-        }
+  beforeRouteLeave(to, from, next) {
+    for (var i = 0; i < 2; i++) {
+      i === 1 && this.trigger()(next);
     }
   },
+  data() {
+    return {
+      flag: 0,
+      active: {
+        listActive: true,
+        mutateActive: false,
+        detailActive: false
+      }
+    };
+  },
   methods: {
-     ceshi(){
-                     
-         console.log('ceshi')
-     }
+    trigger() {
+      const _this = this
+      return function(next) {
+        _this.son && alert(111);
+        next();
+      };
+    },
+    ceshi() {
+      console.log("ceshi");
+    }
   }
 };
 </script>

@@ -1,6 +1,6 @@
 import { Message, Notification } from "element-ui";
 import { log } from "util";
-import { fieldsConfigure } from "./fields"
+import { fieldsConfigure } from "./fields";
 // 失败消息的提示
 export function showError(message) {
   Message({
@@ -38,6 +38,55 @@ export function isType(value = null) {
   return value.constructor.name;
 }
 
+export function isType2(value = null, type) {
+  if (value !== 0 && !value) return false;
+  if(type.constructor.name === 'Array') {
+    type.includes('String' && 'Number' && 'Boolean')
+  } else {
+    return value.constructor.name === type;
+  }
+}
+
+export function isSame(old, now) {
+  // 字符串
+  if (isType2(old, "String") && isType2(now, "String")) {
+    debugger
+    if (old !== now) {
+      return true;
+    }
+  }
+  // 数组
+  if (isType2(old, "Array") && isType2(now, "Array")) {
+    if (old.length !== now.length) {
+      return true;
+    } else {
+      for (let i = 0; i < old.length; i++) {
+        if (isType2(old, "Object") && isType2(now, "Object")) {
+          if (isSame(old[i], now[i])) {
+            return true;
+          } else if (isType2(old[i], "String") && isType2(now[i], "String")) {
+            if (old[i] !== now[i]) {
+              return true;
+            }
+          }
+        }
+      }
+    }
+  }
+  // 对象
+  if (isType2(old, "Object") && isType2(now, "Object")) {
+    if (Object.keys(old).length !== Object.keys(now).length) {
+      return true;
+    } else {
+      for (let i in now) {
+        if (now[i] !== old[i]) {
+          return true;
+        }
+      }
+    }
+  }
+  return false;
+}
 /**
  * 查找索引index
  *  @return {Array,Sting} Obj 查找的对象
@@ -249,25 +298,25 @@ export function copyPropVal(fromObj, toObj) {
     if (ele in fromObj && fromObj[ele]) {
       toObj[ele] = fromObj[ele];
     } else if (ele in fromObj && !fromObj[ele]) {
-      return
+      return;
     } else {
-      matchFieldsVal(fromObj, toObj, ele)
+      matchFieldsVal(fromObj, toObj, ele);
     }
   });
 }
 // fieldsConfigure[prop] 每个字段配置数组, findField 赋值
-function matchFieldsVal (fromObj, toObj, findField) {
-      for(var prop in fieldsConfigure) {
-          if(fieldsConfigure[prop].includes(findField)) {
-            for(let i = 0; i < fieldsConfigure[prop].length; i++) {
-                const field = fieldsConfigure[prop][i]
-               if (field!==findField && fromObj[field]) {
-                   toObj[findField] = fromObj[field]
-                   return
-               }
-            }
+function matchFieldsVal(fromObj, toObj, findField) {
+  for (var prop in fieldsConfigure) {
+    if (fieldsConfigure[prop].includes(findField)) {
+      for (let i = 0; i < fieldsConfigure[prop].length; i++) {
+        const field = fieldsConfigure[prop][i];
+        if (field !== findField && fromObj[field]) {
+          toObj[findField] = fromObj[field];
+          return;
         }
-     }
+      }
+    }
+  }
 }
 /**
  * @param {Array} arr

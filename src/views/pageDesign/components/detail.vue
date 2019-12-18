@@ -17,7 +17,7 @@ export default {
       }            
   },
   methods: {
-     ceshi(){
+     ceshi() {
          console.log('ceshi')
          this.toList()
      },
