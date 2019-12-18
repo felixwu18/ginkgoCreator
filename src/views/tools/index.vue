@@ -13,7 +13,7 @@ export default {
       obj1:{realName: 'wufei', hobby: 'novel', same: 666},
       obj2:{alias: '', love: '', same: ''},
       arr1: [1,2,3],
-      arr2: [2,3,5]
+      arr2: [1,2,3]
     }
   },  
   methods: {
@@ -23,7 +23,7 @@ export default {
       console.log(this.arr1)
       console.log(this.arr2)
       console.log(unique)
-      const test = this.$utils.isSame([{a: 6, 11: 9, b: 999}, 2], [{a: 6, 11: 7,b: 999}, 2])
+      const test = this.$utils.isSame(this.arr1, this.arr2)
       console.log('this same?')
       console.log(test)
     },

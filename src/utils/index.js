@@ -39,18 +39,21 @@ export function isType(value = null) {
 }
 
 export function isType2(value = null, type) {
-  if (value !== 0 && !value) return false;
+  if ((value !== 0) && !value) return false;
   if(type.constructor.name === 'Array') {
-    type.includes('String' && 'Number' && 'Boolean')
+    return type.includes(value.constructor.name)
   } else {
     return value.constructor.name === type;
   }
 }
-
+/**
+ * 检测两值是否相等, 用于修改,提醒调用
+ * @param {*} old 传入的原值
+ * @param {*} now 检测现在的值
+ */
 export function isSame(old, now) {
-  // 字符串
-  if (isType2(old, "String") && isType2(now, "String")) {
-    debugger
+  // 字符串, 数字, 布尔值
+  if (isType2(old, ["String", "Number", "Boolean"]) && isType2(now, ["String", "Number", "Boolean"])) {
     if (old !== now) {
       return true;
     }
@@ -61,13 +64,13 @@ export function isSame(old, now) {
       return true;
     } else {
       for (let i = 0; i < old.length; i++) {
-        if (isType2(old, "Object") && isType2(now, "Object")) {
+        if (isType2(old[i], "Object") && isType2(now[i], "Object")) {
           if (isSame(old[i], now[i])) {
             return true;
-          } else if (isType2(old[i], "String") && isType2(now[i], "String")) {
-            if (old[i] !== now[i]) {
-              return true;
-            }
+          }
+        } else if (isType2(old[i], ["String", "Number", "Boolean"]) && isType2(now[i], ["String", "Number", "Boolean"])) {
+          if (old[i] !== now[i]) {
+            return true;
           }
         }
       }
