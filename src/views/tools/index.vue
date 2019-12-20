@@ -12,8 +12,8 @@ export default {
     return {
       obj1:{realName: 'wufei', hobby: 'novel', same: 666},
       obj2:{alias: '', love: '', same: ''},
-      arr1: [1,2,3],
-      arr2: [1,2,3]
+      arr1: [1,2,3,{aa: 33}],
+      arr2: [1,2,3,{aa: 33}]
     }
   },  
   methods: {

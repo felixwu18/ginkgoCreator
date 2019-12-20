@@ -28,6 +28,9 @@ export function showSuccess(message) {
 }
 
 /**
+ * //定义检测数据类型的功能函数
+    let checkedType = target => Object.prototype.toString.call(target).slice(8, -1);
+ *  
  * reurn 头字符大小的类型,'String','Object','Array'......
  * 返回false,即undefined,null,false等
  * 类型判断
@@ -38,8 +41,12 @@ export function isType(value = null) {
   return value.constructor.name;
 }
 
-export function isType2(value = null, type) {
-  if ((value !== 0) && !value) return false;
+export function isType2(value, type) {
+  // if ((value !== 0) && !value) return false;
+  if(!type) {
+    // return value.constructor.name;
+    return Object.prototype.toString.call(value).slice(8, -1)
+  }
   if(type.constructor.name === 'Array') {
     return type.includes(value.constructor.name)
   } else {
@@ -47,11 +54,18 @@ export function isType2(value = null, type) {
   }
 }
 /**
- * 检测两值是否相等, 用于修改,提醒调用
+ * 检测两值是否相等, 用于修改,提醒调用, 返回true表示与原值不同
  * @param {*} old 传入的原值
  * @param {*} now 检测现在的值
  */
 export function isSame(old, now) {
+  
+  // 数据类型不同, 或 null ,undefined
+  if (isType2(old) !== isType2(now)) {
+      return true;
+  } else if(isType2(old) === isType2(now) && ["Undefined", "Null"].includes(isType2(old))) {
+    return false
+  }
   // 字符串, 数字, 布尔值
   if (isType2(old, ["String", "Number", "Boolean"]) && isType2(now, ["String", "Number", "Boolean"])) {
     if (old !== now) {
