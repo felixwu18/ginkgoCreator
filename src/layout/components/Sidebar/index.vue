@@ -27,12 +27,13 @@
 
 <script>
 import SidebarItem from './SidebarItem'
-import aboutRoutes from '@/router/modules/about.router'
-import homeRoutes from '@/router/modules/home.router'
 
-console.log('routes')
-console.log(aboutRoutes)
-console.log(homeRoutes)
+const routerList = [];
+function importAll(r) {
+  r.keys().forEach(key => routerList.push(r(key).default));
+}
+importAll(require.context("@/router/modules", false, /\.router\.js/));
+
 export default {
    components: { SidebarItem },
    props: {
@@ -46,7 +47,7 @@ export default {
    data() {
       return {
          isCollapse: true,
-         routes: [aboutRoutes, homeRoutes ]
+         routes: routerList
       }
    },
    methods: {

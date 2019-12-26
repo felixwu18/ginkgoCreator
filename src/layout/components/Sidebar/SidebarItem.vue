@@ -65,6 +65,9 @@ export default {
     data() {
       return {}
     },
+    created() {
+
+    },
     methods: {
       linkTo(url) {
       //   if (url.includes('http')) {
@@ -79,5 +82,5 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 </style>

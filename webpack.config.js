@@ -33,6 +33,10 @@ module.exports = (options = {}) => ({
         test: /\.less$/,
         use: ['style-loader', 'css-loader', 'less-loader'],
       },
+      // {
+      //   test: /\.(scss|sass)$/,
+      //   use: ['style-loader', 'css-loader', 'sass-loader'],
+      // },
       {
         test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
         use: [{
@@ -60,11 +64,11 @@ module.exports = (options = {}) => ({
   },
   devServer: {
     host: '127.0.0.1',
-    port: 8010,
-    proxy: {
+    // port: 8012,
+    proxy: { // 代理跨域设置
       '/api/': {
         target: 'http://127.0.0.1:8080',
-        changeOrigin: true,
+        changeOrigin: true, // 是否跨域
         pathRewrite: {
           '^/api': ''
         }

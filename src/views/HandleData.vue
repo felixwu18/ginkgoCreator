@@ -3,11 +3,15 @@
     <h2 @click="test">数据处理 Ramda</h2>
     <p>R.add(2, 3) => {{ R.add(2, 3) }}</p>
     <p>R.add(2)(3) => {{ R.add(2)(3) }}</p>
+    <h2>外部js文件引用</h2>
+    <el-button @click="handleOuterJs">点击测试</el-button>
   </div>
 </template>
 
 <script>
 import * as R from "ramda";
+import { outJs } from "@/utils/out";
+
 export default {
   data: function() {
     return {
@@ -15,11 +19,13 @@ export default {
     };
   },
   components: {},
-  created() {
-  },
+  created() {},
   mounted: function() {},
   computed: {},
   methods: {
+    handleOuterJs() {
+      outJs.call(this, this.test)
+    },
     test() {
       // const {identity} = R
       // R.map(identity, [1, 2, 3])
@@ -41,9 +47,4 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-// .home {
-//   color: blue;
-//   font-size: bold;
-// }
-</style>
+<style scoped></style>

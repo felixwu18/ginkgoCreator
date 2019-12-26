@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="about com_border">
-    <h2>打印</h2>
+    <h2>测试打印</h2>
     <el-button
       v-on="$listeners"
       v-bind="$attrs"
@@ -27,21 +27,21 @@ export default {
          console.log('print的state没开启打印')             
       } else {
        this.print.state && this.callPrint()
-       this.print.state = false             
       }
       return '打印';
     }
   },
   methods: {
     callPrint(){
-       console.log('print方法已调用')
+      console.log('print方法已调用')
        console.log(this.print.list)
+       this.print.state = false             
     }             
   }              
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .about {
   color: green;
   font-size: bold;

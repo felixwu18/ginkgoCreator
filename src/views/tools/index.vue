@@ -35,12 +35,12 @@ export default {
       console.log(obj2)
       this.$utils.copyPropVal(obj1, obj2)
       console.log(obj2)
-     },
+     }
   }
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .about {
   color: green;
   font-size: bold;

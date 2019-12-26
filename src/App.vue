@@ -29,10 +29,15 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 #app {
   font-family: Helvetica, sans-serif;
   text-align: center;
   height: 100vh;
+}
+// $background: #cccccc;
+$margin: 0;
+body{
+  margin: $margin
 }
 </style>
