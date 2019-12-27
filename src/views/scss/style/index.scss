@@ -1,1 +1,24 @@
-@import "./variables" // 变量
+@import "./variables"; // 变量集, 可间接引用
+
+// 复用一大段规则的场景
+@mixin paneactive($image, $level, $vertical, $border-width: 2px) {
+  background: url($image) no-repeat $level $vertical;
+  margin: 0 20px 20px 230px;
+  height: 195px;
+  width: 300px;
+  border: $border-width solid $border-color;
+}
+
+// 页面级混合器中 #{}插值 动态设置class (两个页面的样式类似, 类似的样式抽取成页面混合器)
+@mixin marginChang($class) {
+  .#{$class} {
+    margin: 0 20px 20px 300px;
+  }
+}
+
+// 添加圆角
+@mixin rounded-corners {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
