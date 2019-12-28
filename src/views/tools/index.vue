@@ -12,8 +12,8 @@ export default {
     return {
       obj1:{realName: 'wufei', hobby: 'novel', same: 666},
       obj2:{alias: '', love: '', same: ''},
-      arr1: [1,2,3],
-      arr2: [1,2,3]
+      arr1: [1,2,3,{aa: 33}],
+      arr2: [1,2,3,{aa: 33}]
     }
   },  
   methods: {
@@ -35,12 +35,12 @@ export default {
       console.log(obj2)
       this.$utils.copyPropVal(obj1, obj2)
       console.log(obj2)
-     },
+     }
   }
 };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
 .about {
   color: green;
   font-size: bold;

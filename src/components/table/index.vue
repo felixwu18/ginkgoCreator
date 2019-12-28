@@ -243,6 +243,7 @@
 <script>
 import Pagination from '@/components/Pagination/index'
 export default {
+  name: "dynamicTable",
   data() {
     return {
       // rules: {

@@ -1,0 +1,14 @@
+$border-color:#aaa; //声明变量
+$color-primary: #3ecacb;
+$color-success: #4fc48d;
+$color-warning: #f3d83f;
+$color-danger: #f6588e;
+$color-info: #27c6fa;
+
+$border-width: 300px;
+$border-height: 200px;
+
+// 路径
+$common-path: './img/';
+$img-path: $common-path + 'meinv.jpg';
+$rose-path: $common-path + 'rose.png'
