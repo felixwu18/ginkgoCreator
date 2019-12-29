@@ -38,6 +38,6 @@ export default {
 // $background: #cccccc;
 $margin: 0;
 body{
-  margin: $margin
+  margin: $margin;
 }
 </style>

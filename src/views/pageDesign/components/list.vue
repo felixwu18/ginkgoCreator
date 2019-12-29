@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="about com_border">
     <h2>列表页</h2>
     <dynamicTable

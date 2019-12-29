@@ -37,7 +37,7 @@ export default {
        console.log(this.print.list)
        this.print.state = false             
     }             
-  }              
+  }           
 };
 </script>
 

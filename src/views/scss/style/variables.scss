@@ -1,14 +1,29 @@
+// 页面主体
+$menueText: #A6B6C4; // 侧边默认字体颜色
+$menuActiveText:#333333; //选中字体颜色
+$menuBg: #fff;
+$menuHover: #DDF6F8;
+$menuHoverColor: #00B0A2; //菜单hover字体颜色
+$menueChildBg: #FAFAFA; // 侧边栏子级颜色
+$menuHideWidth: 52px; // 侧边栏缩小宽度
+
 $border-color:#aaa; //声明变量
 $color-primary: #3ecacb;
 $color-success: #4fc48d;
 $color-warning: #f3d83f;
 $color-danger: #f6588e;
 $color-info: #27c6fa;
+$color-blue: blue;
 
+$fontSize1: 15px;
+$fontSize2: 14px;
+
+$sideBarWidth: 254px; // 侧边栏宽度
 $border-width: 300px;
 $border-height: 200px;
 
 // 路径
 $common-path: './img/';
 $img-path: $common-path + 'meinv.jpg';
-$rose-path: $common-path + 'rose.png'
+$rose-path: $common-path + 'rose.png';
+

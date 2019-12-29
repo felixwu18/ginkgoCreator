@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="about com_border">
     <h2>相同参数含义,不同字段配置</h2>
     <el-button @click="ceshi">点击ceshi</el-button>

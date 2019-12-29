@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="about com_border">
     <h2>修改页面</h2>
     <el-button @click="ceshi">返回列表</el-button>

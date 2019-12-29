@@ -1,4 +1,4 @@
-<template lang="html">
+<template>
   <div class="about com_border">
     <List v-if="active.listActive" :active="active" :father="this" />
     <Mutate v-if="active.mutateActive" :active="active" :father="this" />

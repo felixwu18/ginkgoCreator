@@ -19,7 +19,7 @@
     >
       <!-- 单选设置 -->
       <el-table-column v-if="radio" fixed label="选择" width="60px">
-        <template scope="scope">
+        <template slot-scope="scope">
           <el-radio v-model="radioVal" :label="scope.$index" @change="radioChange">&nbsp;</el-radio>
         </template>
       </el-table-column>
@@ -27,7 +27,7 @@
       <el-table-column v-if="selection" label="选择" type="selection" width="60px"></el-table-column>
       <!-- 序号 -->
       <el-table-column v-if="index" label="序号" width="60px">
-        <template scope="scope">
+        <template slot-scope="scope">
           <!-- 此处可加svg-icon图标 -->
           {{ scope.$index + 1 }}
         </template>
@@ -43,7 +43,7 @@
           :key="index"
           v-if="!formHeadItem.children"
         >
-          <!-- <template scope="scope">{{scope.row[formHeadItem.prop]}}</template> -->
+          <!-- <template slot-scope="scope">{{scope.row[formHeadItem.prop]}}</template> -->
           <!-- 输入控制 -->
           <template slot-scope="scope">
             <!-- 输入框 -->

@@ -4,13 +4,21 @@
     <div class="scss"><div class="scss-inner">测试嵌套选择器</div> scss</div>
     <div class="img"></div>
     <div class="rose"></div>
+    <img :src="imgUrl" alt="">
     <button class="btn">按钮</button>
   </div>
 </template>
 
 <script>
+// const imgUrl = require('./img/rose.png')
+import imgUrl from './img/meinv.jpg'
 export default {
   name: 'scss',
+  data(){
+    return{
+      imgUrl
+    }
+  }
 };
 </script>
 

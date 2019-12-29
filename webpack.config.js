@@ -17,35 +17,45 @@ module.exports = (options = {}) => ({
   },
   module: {
     rules: [{
-        test: /\.vue$/,
-        use: ['vue-loader']
-      },
-      {
-        test: /\.js$/,
-        use: ['babel-loader'],
-        exclude: /node_modules/
-      },
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
-      },
-      {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader'],
-      },
-      // {
-      //   test: /\.(scss|sass)$/,
-      //   use: ['style-loader', 'css-loader', 'sass-loader'],
-      // },
-      {
-        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            limit: 10000
-          }
-        }]
-      }
+      test: /\.vue$/,
+      use: ['vue-loader']
+    },
+    {
+      test: /\.js$/,
+      use: ['babel-loader'],
+      exclude: /node_modules/
+    },
+    {
+      test: /\.css$/,
+      use: ['style-loader', 'css-loader', 'postcss-loader']
+    },
+    {
+      test: /\.less$/,
+      use: ['style-loader', 'css-loader', 'less-loader'],
+    },
+    // {
+    //   test: /\.(scss|sass)$/,
+    //   use: ['style-loader', 'css-loader', 'sass-loader'],
+    // },
+    {
+      test: /\.svg$/,
+      use: [{
+        loader: 'svg-sprite-loader',
+        include: [resolve('src/icons')],
+        options: {
+          limit: 10000
+        }
+      }],
+    },
+    {
+      test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+      use: [{
+        loader: 'url-loader',
+        options: {
+          limit: 10000
+        }
+      }]
+    }
     ]
   },
   plugins: [
