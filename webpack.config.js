@@ -37,16 +37,16 @@ module.exports = (options = {}) => ({
     //   test: /\.(scss|sass)$/,
     //   use: ['style-loader', 'css-loader', 'sass-loader'],
     // },
-    {
-      test: /\.svg$/,
-      use: [{
-        loader: 'svg-sprite-loader',
-        include: [resolve('src/icons')],
-        options: {
-          limit: 10000
-        }
-      }],
-    },
+    // {
+    //   test: /\.svg$/,
+    //   use: [{
+    //     loader: 'svg-sprite-loader',
+    //     include: [resolve('src/icons')],
+    //     options: {
+    //       limit: 10000
+    //     }
+    //   }],
+    // },
     {
       test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
       use: [{
