@@ -13,7 +13,18 @@
         <scrollPane />
       </el-tab-pane>
       <el-tab-pane label="锚点导航" name="five">
-        <positionNav />
+        <div class="scroll-container">
+          <div class="jump_menu">
+            目录内容1
+          </div>
+          <div class="jump_menu">
+            目录内容2
+          </div>
+          <div class="jump_menu">
+            目录内容3
+          </div>
+        </div>
+        <positionNav class="positionNav" />
       </el-tab-pane>
   </el-tabs>
     <!-- <p>{{msg}}</p> -->
@@ -28,7 +39,7 @@ export default {
   components: { sub_, scrollPane, positionNav },
   data() {
     return {
-      activeName: "forth",
+      activeName: "five",
       print: {
         state: false,
         list: []
@@ -75,5 +86,22 @@ export default {
   height: 700px;
 }
 
+.el-tab-pane {
+ height: 70vh;
+ overflow: hidden;
+  .jump_menu {
+    height: 50vh;
+  }
+  .positionNav{
+    position: fixed;
+    top: 209px;
+    right: 40px;
+    // border: solid;
+  }
+}
+.scroll-container {
+  height: 100%;
+  overflow: auto;
+}
 </style>
  

@@ -16,8 +16,8 @@
             </el-main>
         </div>
         <div class="menu-transition-icon" :style="{position: 'absolute', left: !isCollapse ? '400px' : ''}">
-            <div v-show="isCollapse" class="icon-arrow-right" @click="isCollapse=false" />
-            <div v-show="!isCollapse" class="icon-arrow-left" @click="isCollapse=true" />
+            <div v-show="isCollapse" class="el-icon-d-arrow-right" @click="isCollapse=false" />
+            <div v-show="!isCollapse" class="el-icon-d-arrow-left" @click="isCollapse=true" />
         </div>
     </div>
 </template>
