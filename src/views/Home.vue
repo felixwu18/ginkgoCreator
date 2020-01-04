@@ -3,7 +3,8 @@
     <h2>组件优化</h2>
   <el-tabs class="margin" v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="组件递归" name="first">
-        <sub_  :data-from-father="dataFromFather" />
+        <!-- <sub_  :data-from-father="dataFromFather" /> -->
+        <tree />
       </el-tab-pane>
       <el-tab-pane label="打印组件" name="second">
         <print :print="print" @click="handlePrint"/>
@@ -23,6 +24,9 @@
           <div class="jump_menu">
             目录内容3
           </div>
+          <div class="jump_menu">
+            目录内容4
+          </div>
         </div>
         <positionNav class="positionNav" />
       </el-tab-pane>
@@ -35,11 +39,12 @@
 import sub_ from "./sub_";
 import scrollPane from "@/components/scrollPane";
 import positionNav from "@/components/positionNav";
+import tree from "@/components/tree";
 export default {
-  components: { sub_, scrollPane, positionNav },
+  components: { sub_, scrollPane, positionNav, tree },
   data() {
     return {
-      activeName: "five",
+      activeName: "first",
       print: {
         state: false,
         list: []

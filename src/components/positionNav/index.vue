@@ -9,6 +9,12 @@
         <div class="nav-item" :class="activeClass(2)" @click="jump(2)">
             目录3
         </div>
+        <div class="nav-item" :class="activeClass(3)" @click="jump(3)">
+            目录4
+        </div>
+        <div class="nav-top" :class="activeClass(3)" @click="toTop">
+            top
+        </div>
     </div>
 </template>
 
@@ -75,9 +81,30 @@ export default {
        }
      },
      onScroll() {
-         console.log('滚动监听成功')
-         this.menuActive ++ 
-         this.menuActive === 3 && (this.menuActive = 0)
+         const scrolled = document.getElementsByClassName('scroll-container')[0].scrollTop
+         if(scrolled < 485){
+             this.menuActive = 0
+         } else if(scrolled >= 485 && scrolled < 971) {
+             this.menuActive = 1
+         } else if(scrolled > 971 && scrolled < 1200) {
+             this.menuActive = 2
+         } else if(scrolled >= 1200) {
+             this.menuActive = 3
+         }
+     },
+     toTop() {
+         let scrollNow = document.getElementsByClassName('scroll-container')[0].scrollTop
+         const step = scrollNow / 50
+         topScroll()
+         function topScroll() {
+             if(scrollNow > 10) {
+                 scrollNow -= step
+                 document.getElementsByClassName('scroll-container')[0].scrollTop = scrollNow
+                 setTimeout(topScroll, 5)
+             }else {
+                 document.getElementsByClassName('scroll-container')[0].scrollTop = 0
+             }
+         }
      }
   }       
 };
@@ -110,6 +137,16 @@ export default {
             color: #15bdcf;
             background: #fff;
         }
+    }
+    .nav-top {
+        height: 40px;
+        width: 40px;
+        line-height: 40px;
+        padding: 9px;
+        border: solid 1px #d8ded8;
+        color: #fff;
+        background: linear-gradient(45deg, rgba(33,201, 219,1) 0%, rgba(21, 189, 207, 1) 100%);
+        cursor: pointer;
     }
 }
 </style>
