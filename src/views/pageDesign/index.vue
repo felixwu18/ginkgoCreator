@@ -1,5 +1,5 @@
 <template>
-  <div class="about com_border">
+  <div class=" margin about com_border">
     <List v-if="active.listActive" :active="active" :father="this" />
     <Mutate v-if="active.mutateActive" :active="active" :father="this" />
     <Detail v-if="active.detailActive" :active="active" :father="this" />
@@ -51,5 +51,8 @@ export default {
 .about {
   color: green;
   font-size: bold;
+}
+.margin {
+  margin: 0 20px 20px 230px;
 }
 </style>

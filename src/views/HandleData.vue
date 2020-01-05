@@ -46,6 +46,7 @@ export default {
       outJs.call(this, this.test)
     },
     handle_If_else() {
+      // 配合es6的${}，js代码编写在字符串里,厉害
       const age = 29
       const config =[{case: `${age} < 17`, back: '你不到18岁'},{case: `${age} > 18 && ${age} < 30` , back: '你已满18，使劲嗨'}, {case: `${age} >= 30` , back: '已到而立，加油便是'}]
       const tip = this.$utils.caseMapTo(config)
