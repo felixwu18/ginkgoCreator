@@ -1,5 +1,4 @@
 import { Message, Notification } from "element-ui";
-import { log } from "util";
 import { fieldsConfigure } from "./fields";
 // 失败消息的提示
 export function showError(message) {
@@ -432,4 +431,20 @@ export const handleSave = (function() {
   };
 })();
 
-// 属性赋值(不同字段)
+// 封装优化if-else
+/**
+ * 带变量的条件，执行判断，返回值
+ * @param {arrObj} config 
+ * config = [{case:`${a} < 6`, back: 'a变量的值小于6'},...]
+ */
+export function caseMapTo(config) {
+  if(!config) {
+   return
+ }   
+ for(let i = 0;i < config.length;i++){
+  if(eval(config[i].case)) {
+    return config[i].back
+  }
+ }
+}
+
