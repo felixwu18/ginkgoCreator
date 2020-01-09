@@ -1,7 +1,7 @@
 <template>
   <div class="about com_border">
     <h2>列表页</h2>
-    <button @click="ceshi">ceshi</button>
+    <!-- <button @click="ceshi">ceshi</button> -->
       <List :formHeadRef="$refs" :formHead="tableHead" v-if="active.listActive" :active="active" :father="this">  
         <formHead ref="formHead" :search="search" slot="form" />
       </List>
