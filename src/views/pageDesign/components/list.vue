@@ -2,8 +2,8 @@
   <div class="about com_border">
     <h2>列表页</h2>
     <button @click="ceshi">ceshi</button>
-      <List :formHead="tableHead" v-if="active.listActive" :active="active" :father="this">  
-        <formHead :search="search" slot="form" />
+      <List :formHeadRef="$refs" :formHead="tableHead" v-if="active.listActive" :active="active" :father="this">  
+        <formHead ref="formHead" :search="search" slot="form" />
       </List>
     </div>
 </template>
@@ -56,6 +56,7 @@ export default {
      ceshi() {
          console.log('ceshi')
          console.log(this.search)
+         console.log(this.$refs.formHead)
      }
   }
 };

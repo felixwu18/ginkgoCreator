@@ -1,5 +1,6 @@
 <template>
   <div class="about com_border">
+    <button @click="ceshi">inner ceshi</button>
     <!-- <formHead /> -->
     <slot name="form" />
     <dynamicTable
@@ -88,7 +89,8 @@ const tableData = [
 export default {
   props: {
       active: { type: Object, default: _ => {} },            
-      father: { type: Object, default: _ => {} }       
+      father: { type: Object, default: _ => {} },
+      formHeadRef: { type: Object, default: _ => {} } 
   },
 //   components: {
 //     formHead
@@ -109,8 +111,9 @@ export default {
   methods: {
      ceshi(){
          console.log('ceshi')
-         console.log(this.$refs.slot)
-         this.$refs.slot
+         console.log(this.$slots.form[0].data.ref)
+         console.log(this.formHeadRef)
+        
      },
      eventTrigger(row, eventName){
         console.log('row--eventName')
