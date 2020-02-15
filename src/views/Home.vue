@@ -82,13 +82,9 @@
 
       </el-tab-pane>
       <el-tab-pane class="textLeft height" label="iframe" name="six">
-        <!-- <iframe style="float: right; width: 600px;height: 600px" frameborder="yes" vspace="-170" src="https://www.baidu.com"></iframe> -->
-        <div style="float:right;width:630px;height:350px;overflow:hidden;border:0px"> 
-            <iframe style="margin:-810px 0px 0px -10px" src="http://www.sci99.com/" width="960" height="1280" scrolling="no"></iframe>
-        </div> 
-        <div style="float:right; width:800px;height:900px;overflow:hidden;border:0px"> 
-            <iframe style="margin:-320px 0px 0px -10px;" src="http://www.sci99.com/details/monitorall.aspx" width="700" height="1024" scrolling="no"></iframe>
-        </div>
+        <!-- <marquee /> -->
+        <iframePage url="http://www.sci99.com/" />
+        <iframePage origin-width="800px" origin-height="900px" width="700px" height="1024px" margin="-320px 0px 0px -10px"  url="http://www.sci99.com/details/monitorall.aspx" />
       </el-tab-pane>
   </el-tabs>
     <!-- <p>{{msg}}</p> -->
@@ -110,8 +106,10 @@ import sub_ from "./sub_";
 import scrollPane from "@/components/scrollPane";
 import positionNav from "@/components/positionNav";
 import tree from "@/components/tree";
+import iframePage from "@/components/iframePage";
+import marquee from "@/components/marquee";
 export default {
-  components: { sub_, scrollPane, positionNav, tree },
+  components: { sub_, scrollPane, positionNav, tree, iframePage, marquee },
   data() {
     return {
       activeName: "first",

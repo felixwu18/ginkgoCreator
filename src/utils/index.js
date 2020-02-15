@@ -448,3 +448,18 @@ export function caseMapTo(config) {
  }
 }
 
+/**
+ * 带变量的条件，执行判断，返回值
+ * @param {Object} obj 
+ * {index: 1, size: 5} => index=1&size=5
+ */
+
+const serialize = function(obj) {
+  var ary = []
+  for (var p in obj) {
+    if (obj.hasOwnProperty(p) && obj[p]) {
+        ary.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
+    }
+  }
+  return ary.join('&');
+}

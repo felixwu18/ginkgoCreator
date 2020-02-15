@@ -12,7 +12,7 @@ Vue.prototype.$utils = utils
 import plugin from './plugin'
 Vue.use(plugin);
 
-// import '@/styles/index.less' // global css
+import '@/styles/index.less' // global css
 // import './views/scss/style/common.scss' // global css
 
 Vue.use(ElementUI)
