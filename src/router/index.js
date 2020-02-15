@@ -30,8 +30,7 @@ export default new VueRouter({
             //       id: '1',
             //     }
             //  },
-        
-       ]
+        ]
        }
   ]
   //   routes: [

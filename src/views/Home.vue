@@ -14,7 +14,7 @@
         <scrollPane />
       </el-tab-pane>
       <el-tab-pane label="锚点导航" name="five">
-        <!-- <div class="scroll-container">
+        <div class="scroll-container">
           <div class="jump_menu">
             目录内容1
           </div>
@@ -28,8 +28,8 @@
             目录内容4
           </div>
         </div>
-        <positionNav class="positionNav" /> -->
-        <div style="float: right; border: solid; height：100px;">
+        <positionNav class="positionNav" />
+        <!-- <div style="float: right; border: solid; height：100px;">
             <li>1-dsdsd</li>
             <li>dsdsd</li>
             <li>dsdsd</li>
@@ -78,7 +78,7 @@
             <li>dsdsd</li>
             <li>dsdsd</li>
             <li>41-dsdsd</li>
-        </div>
+        </div> -->
 
       </el-tab-pane>
       <el-tab-pane class="textLeft height" label="iframe" name="six">

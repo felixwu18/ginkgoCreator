@@ -15,8 +15,10 @@
         <h2>封装优化if-else</h2>
         <el-button @click="handle_If_else">点击测试</el-button>
       </el-tab-pane>
-      <el-tab-pane label="blank" name="forth">
-        66
+      <el-tab-pane label="代码优化-模块化" name="forth">
+        <!-- 健壮性：异常或危险的情况下，系统生存的能力(局部出错，避免整个系统崩溃) -->
+        <!-- 1,参数处理(假设不是想要的情况，就默认给一个想要的值) 2, try...catch 3， 变量权限    -->
+        <!-- 模块化 -->
       </el-tab-pane>
       <el-tab-pane label="blank" name="five">
         666
@@ -38,10 +40,13 @@ export default {
     };
   },
   components: {},
-  created() {},
+  created() {
+  },
   mounted: function() {},
   computed: {},
   methods: {
+    handleClick() {
+    },
     handleOuterJs() {
       outJs.call(this, this.test)
     },
