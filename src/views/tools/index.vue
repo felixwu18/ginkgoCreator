@@ -63,13 +63,13 @@ export default {
       
     },
     arrUnique() {
-      const unique = [...new Set(this.arr1.concat(this.arr2))] // Array.from(new Set(arr1.concat(arr2)))
-      console.log('arr1-arr2-unique')
+      // const unique = [...new Set(this.arr1.concat(this.arr2))] // Array.from(new Set(arr1.concat(arr2)))
+      // console.log('arr1-arr2-unique')
       console.log(this.arr1)
       console.log(this.arr2)
-      console.log(unique)
-      const test = this.$utils.isSame(this.arr1, this.arr2)
-      console.log('this same?')
+      // console.log(unique)
+      const test = this.$utils.noSame(this.arr1, this.arr2)
+      console.log('no same?')
       console.log(test)
     },
     ceshi() {

@@ -5,6 +5,9 @@
       <List :formHeadRef="$refs" :formHead="tableHead" v-if="active.listActive" :active="active" :father="this">  
         <formHead ref="formHead" :search="search" slot="form" />
       </List>
+  <transition name='move'>
+      <h2>666</h2>
+  </transition>
     </div>
 </template>
 
@@ -67,4 +70,18 @@ export default {
   color: green;
   font-size: bold;
 }
+  /*显示的过渡效果*/
+  .move-enter-active {
+    transition: all 0.2s;
+  }
+  /*隐藏的过渡效果*/
+  .move-leave-active {
+    transition: all 0.2s;
+  }
+  /*隐藏时的样式*/
+  .move-enter,
+  .move-leave-to {
+    transform: translatex(20em);
+  }
+
 </style>

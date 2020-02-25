@@ -29,62 +29,18 @@
           </div>
         </div>
         <positionNav class="positionNav" />
-        <!-- <div style="float: right; border: solid; height：100px;">
-            <li>1-dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>dsdsd</li>
-            <li>41-dsdsd</li>
-        </div> -->
 
       </el-tab-pane>
       <el-tab-pane class="textLeft height" label="iframe" name="six">
-        <!-- <marquee /> -->
         <iframePage url="http://www.sci99.com/" />
         <iframePage origin-width="800px" origin-height="900px" width="700px" height="1024px" margin="-320px 0px 0px -10px"  url="http://www.sci99.com/details/monitorall.aspx" />
+      </el-tab-pane>
+      <el-tab-pane class="textLeft height" label="拖拽库sortable" name="seven">
+        <ul id="items">
+          <li class="item">item 1</li>
+          <li class="item-">item 2</li>
+          <li class="item-">item 3</li>
+        </ul>
       </el-tab-pane>
   </el-tabs>
     <!-- <p>{{msg}}</p> -->
@@ -102,17 +58,22 @@
 // 7.srcdoc , 用来替代原来HTML body里面的内容。但是IE不支持, 不过也没什么卵用
 // 8.sandbox: 对iframe进行一些列限制，IE10+支持
 
+// Default SortableJS
+import Sortable from 'sortablejs';
 import sub_ from "./sub_";
 import scrollPane from "@/components/scrollPane";
 import positionNav from "@/components/positionNav";
 import tree from "@/components/tree";
 import iframePage from "@/components/iframePage";
 import marquee from "@/components/marquee";
+
+
 export default {
   components: { sub_, scrollPane, positionNav, tree, iframePage, marquee },
   data() {
+    
     return {
-      activeName: "first",
+      activeName: "five",
       print: {
         state: false,
         list: []
@@ -126,6 +87,45 @@ export default {
         { title: "一阳指", children: [{ title: "玄铁重剑" }] }
       ]
     };
+  },
+  mounted() {
+    var el = document.getElementById('items');
+    var sortable = Sortable.create(el,
+    //  {
+    //   // delay: 80,
+    //   chosenClass: 'chosen',
+    //   scroll: true, 
+    // }
+    );
+    var sortable = new Sortable(el, {
+      draggable: ".item",
+      // // Element is chosen
+      // onChoose: function (/**Event*/evt) {
+      //     evt.oldIndex;  // element index within parent
+      //     console.log('evt.from');
+
+      // },
+        // Element dragging started
+      onStart: function (/**Event*/evt) {
+          evt.oldIndex;  // element index within parent
+          debugger
+      },
+      onEnd: function (/**Event*/evt) {
+      // var itemEl = evt.item;  // dragged HTMLElement
+      // evt.to;    // target list
+      // evt.from;  // previous list
+      // evt.oldIndex;  // element's old index within old parent
+      // evt.newIndex;  // element's new index within new parent
+      // evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
+      // evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
+      // evt.clone // the clone element
+      // evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
+      console.log('evt.from');
+      console.log('evt.to');
+    
+  }
+    });
+    console.log(el, 1111);
   },
   props: {
     //接受上级传来的数据,先声明一个props属性接受
@@ -181,5 +181,8 @@ export default {
 .scroll-container {
   height: 100%;
   overflow: auto;
+}
+.chosen {
+  background: blue
 }
 </style>

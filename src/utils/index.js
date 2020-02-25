@@ -57,7 +57,7 @@ export function isType2(value, type) {
  * @param {*} old 传入的原值
  * @param {*} now 检测现在的值
  */
-export function isSame(old, now) {
+export function noSame(old, now) {
   
   // 数据类型不同, 或 null ,undefined
   if (isType2(old) !== isType2(now)) {
@@ -78,7 +78,7 @@ export function isSame(old, now) {
     } else {
       for (let i = 0; i < old.length; i++) {
         if (isType2(old[i], "Object") && isType2(now[i], "Object")) {
-          if (isSame(old[i], now[i])) {
+          if (noSame(old[i], now[i])) {
             return true;
           }
         } else if (isType2(old[i], ["String", "Number", "Boolean"]) && isType2(now[i], ["String", "Number", "Boolean"])) {

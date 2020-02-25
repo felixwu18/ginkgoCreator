@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import ElementUI from 'element-ui'
+// import ComponentLib from 'component-lib'
+console.log(ElementUI, 1111);
+
 import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 
@@ -16,6 +19,7 @@ import '@/styles/index.less' // global css
 // import './views/scss/style/common.scss' // global css
 
 Vue.use(ElementUI)
+// Vue.use(ComponentLib)
 
 new Vue({
   el: '#app',
