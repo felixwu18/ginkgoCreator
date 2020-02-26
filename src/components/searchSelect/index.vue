@@ -1,7 +1,6 @@
 <template>
   <div>
     <h1>输入框、选择框等</h1>
-    <searchInput :title="title" :width="width">
       <el-select
         @change="changeSelect"
         v-model="value"
@@ -9,6 +8,8 @@
         :disabled="disabled"
         placeholder="请选择"
         size="medium"
+        v-on="$listeners"
+        v-bind="$attrs"
       >
         <!-- <el-option v-for="(item,key) in configure_obj?configure_obj[config_name]:{}" :key="key" :label="item" :value="key">
         </el-option>-->
@@ -19,11 +20,9 @@
           :value="item.key"
         ></el-option>
       </el-select>
-    </searchInput>
   </div>
 </template>
 <script>
-import searchInput from "./searchInput";
 export default {
   name: "searchSelect",
   data() {
@@ -43,13 +42,21 @@ export default {
     disabled: [Boolean]
   },
   components: {
-    searchInput
   },
   methods: {
     changeSelect(key) {
-      const value = this.$utils.confugureFormatter(this.configure, key);
+      const value = this.confugureFormatter(this.configure, key);
       this.$emit(`change`, { key, value });
       this.$emit(`update:insertValue`, key);
+    },
+    confugureFormatter(configure, key) {
+      // key对应code, value对应转换后的值
+      if (configure) {
+        let matchObj = configure.filter(e => e.key === key);
+        if (matchObj[0]) {
+          return matchObj[0].value;
+        }
+      }
     }
   },
   computed: {
@@ -62,7 +69,8 @@ export default {
     //   this.value = this.insertValue;
     // }
   },
-  created() {},
+  created() {
+  },
   activated() {
     console.log("searchSelect activated");
     // this.obtainSelect()
