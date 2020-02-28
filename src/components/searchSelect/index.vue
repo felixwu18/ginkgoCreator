@@ -1,8 +1,7 @@
 <template>
   <div>
-    <h1>输入框、选择框等</h1>
+      <!-- @change="changeSelect" -->
       <el-select
-        @change="changeSelect"
         v-model="value"
         clearable
         :disabled="disabled"
@@ -11,13 +10,11 @@
         v-on="$listeners"
         v-bind="$attrs"
       >
-        <!-- <el-option v-for="(item,key) in configure_obj?configure_obj[config_name]:{}" :key="key" :label="item" :value="key">
-        </el-option>-->
         <el-option
           v-for="(item,index) in configure.length ? configure:[]"
           :key="index"
-          :label="item.value"
-          :value="item.key"
+          :label="item[_fields.value]"
+          :value="item[_fields.key]"
         ></el-option>
       </el-select>
   </div>
@@ -27,55 +24,52 @@ export default {
   name: "searchSelect",
   data() {
     return {
-      // value: '',
-      // configure_obj: {},
-      // configure: null,
-    };
+    }
   },
   // props: { title: [String], config_name: [String], insertValue: [String, Number], width: [String, Number], clearable: [Boolean, String] },
   props: {
-    title: [String],
     configure: [Array],
-    insertValue: [Number, String],
-    width: [String, Number],
+    insertValue: [Number, String, Array],
     clearable: [Boolean, String],
-    disabled: [Boolean]
+    fields: {type: Object, default: () => {}},
+    disabled: [Boolean],
+    isNumber: {type: Boolean, default: false}
   },
-  components: {
+  computed: {
+    value: {
+      get() {
+        console.log(this.insertValue,11111111111);
+        return this.insertValue
+      },
+      set(key) {
+        !this.isNumber && typeof key === 'number' ? key = String(key) : '' // 默认字符串
+        const value = this.confugureFormatter(this.configure, key)
+        this.$emit('update:insertValue', key) // 编码
+        this.$emit('change', {[this._fields.key]: key, [this._fields.value]: value}) // 传编码及值
+      }
+    },
+    _fields() {
+      if (!this.fields || !Object.keys(this.fields).length) {
+        return { key: 'key', value: 'value'} // 默认对应属性 key-valu
+      } else {
+        return this.fields
+      }
+    }
   },
   methods: {
-    changeSelect(key) {
-      const value = this.confugureFormatter(this.configure, key);
-      this.$emit(`change`, { key, value });
-      this.$emit(`update:insertValue`, key);
-    },
     confugureFormatter(configure, key) {
       // key对应code, value对应转换后的值
       if (configure) {
-        let matchObj = configure.filter(e => e.key === key);
+        const matchObj = configure.filter(e => e[this._fields.key] === key);
         if (matchObj[0]) {
-          return matchObj[0].value;
+          return matchObj[0][this._fields.value];
         }
       }
     }
   },
-  computed: {
-    value() {
-      return this.insertValue;
-    }
-  },
-  watch: {
-    // insertValue() {
-    //   this.value = this.insertValue;
-    // }
-  },
   created() {
-  },
-  activated() {
-    console.log("searchSelect activated");
-    // this.obtainSelect()
   }
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 </style>

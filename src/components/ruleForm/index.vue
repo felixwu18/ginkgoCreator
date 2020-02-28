@@ -1,29 +1,23 @@
 <template>
+<!-- <div>
+  <el-button type="primary" @click="submitForm('Form')">立即创建inner</el-button> -->
   <el-form
-    :model="ruleForm"
-    :rules="rules"
+    :model="data"
+    :rules="_rules"
     ref="Form"
     label-width="100px"
     class="demo-ruleForm"
+    v-on="$listeners"
+    v-bind="$attrs"
   >
-    <demo :rule-form="ruleForm" flag="select" />
-    <button @click="ceshi" @change="ceshi">ceshi</button>
+    <demo />
+    <!-- <button @click="ceshi" @change="ceshi">ceshi</button> -->
     <!-- <el-form-item label="活动名称" prop="name" ref="nameItem">
       <el-input v-model="ruleForm.name" clearable></el-input>
     </el-form-item> -->
-    <el-form-item label="活动区域" prop="region">
-      <!-- <el-select
-        v-model="ruleForm.region"
-        :disabled="isDisable('region', ruleForm.name)"
-        clearable
-        placeholder="请选择活动区域"
-      >
-        <el-option label="区域一" value="0"></el-option>
-        <el-option label="区域二" value="1"></el-option>
-      </el-select> -->
-      <searchSelect :insertValue.sync="ruleForm.region" :configure="configue_area"  />
-    </el-form-item>
-    
+    <!-- <el-form-item label="活动区域" prop="region">
+      <searchSelect :insertValue.sync="ruleForm.region" :configure="configue_area" :isNumber="true" />
+    </el-form-item> -->
     <!-- 测试静默阻止不合规内容 -->
     <!-- <el-form-item label="只能数字" prop="input">
       <el-input
@@ -41,60 +35,66 @@
       ></el-input>
     </el-form-item> -->
   </el-form>
+<!-- </div> -->
 </template>
 
 <script>
 import searchSelect from "@/components/searchSelect/index"
+import check from"@/utils/validate"
+var _this = {} // 拿表单this, 便于在外js文件里处理表单值清除，禁用或隐藏控制
+
 const demo = {
   name: 'demo',
-  functional: true, // 作用下面ctx开启
+  functional: true,
   props: {
-      flag: String,
-      ruleForm: Object
+      // flag: String,
+      // ruleForm: Object
   },
   render: (h, ctx) => {
     console.log(ctx, 1111)
     const parent = ctx.parent
     console.log(parent, 66666)
-    const props = ctx.props
-    const ruleForm = props.ruleForm
-    const test = {
-      input: (
-        <el-form-item label="活动名称" prop="name" ref="nameItem">
-          <el-input input="ceshi" v-model={ruleForm.name} clearable></el-input>
-        </el-form-item>
-        // <div> 666 </div>
-      ),
-      select: (
-        // <el-form-item label="活动区域" prop="region">
-        //   <el-select
-        //     v-model={ruleForm.region}
-        //     // disabled={parent.isDisable('region', ruleForm.name)}
-        //     clearable
-        //     placeholder="请选择活动区域"
-        //     // v-on={ctx.listseners}
-        //     onChange={parent.ceshi}
-        //     // v-bind={$attrs}
-        //   >
-        //     <el-option label="区域一" value="0"></el-option>
-        //     <el-option label="区域二" value="1"></el-option>
-        //   </el-select>
-        // </el-form-item>
-        <searchSelect insertValue={parent.data.region} configure={parent.configs[1].config} />
-                // <div> 666 </div>
-      ),
-      date: (
-         <el-form-item label="日期" prop="date">
-          <el-date-picker 
-            type="date"
-            placeholder="选择日期"
-            v-model={ruleForm.date}
-            style="width: 100%;"
-          ></el-date-picker>
-        </el-form-item>        
-      )
-    }
-    return test[props.flag]
+    // const props = ctx.props
+    // const ruleForm = props.ruleForm
+    // const test = {
+    //   input: (
+    //     <el-form-item label="活动名称" prop="name" ref="nameItem">
+    //       <el-input v-model={ruleForm.name} clearable></el-input>
+    //     </el-form-item>
+    //   ),
+    //   select: (
+    //     // <el-form-item label="活动区域" prop="region">
+    //     //   <el-select
+    //     //     v-model={ruleForm.region}
+    //     //     // disabled={parent.isDisable('region', ruleForm.name)}
+    //     //     clearable
+    //     //     placeholder="请选择活动区域"
+    //     //     // v-on={ctx.listseners}
+    //     //     onChange={parent.ceshi}
+    //     //     // v-bind={$attrs}
+    //     //   >
+    //     //     <el-option label="区域一" value="0"></el-option>
+    //     //     <el-option label="区域二" value="1"></el-option>
+    //     //   </el-select>
+    //     // </el-form-item>
+    //     <searchSelect insertValue={parent.data.region} configure={parent.configs[1].config} is-number={true} />
+    //             // <div> 666 </div>
+    //   ),
+    //   date: (
+    //      <el-form-item label="日期" prop="date">
+    //       <el-date-picker 
+    //         type="date"
+    //         placeholder="选择日期"
+    //         v-model={ruleForm.date}
+    //         style="width: 100%;"
+    //       ></el-date-picker>
+    //     </el-form-item>        
+    //   )
+    // }
+         console.log(this, 66)
+    return parent.configs.map(configItem => {
+      return parent.initData(configItem)
+    })
   }
 }
 
@@ -120,43 +120,103 @@ export default {
     searchSelect
   },
   data() {
+    _this = this
     return {
       configue_area,
       numberReg: /^[0-9]+.?[0-9]*$/,
-      ruleForm: {
-        date: '',
-        name: "",
-        region: "",
-        input: "",
-        notNumber: ""
-      },
+      // ruleForm: {
+      //   date: '',
+      //   name: "",
+      //   region: "",
+      //   input: "",
+      //   notNumber: ""
+      // },
       rules: {
-        name: [
-          { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
-          { required: true, message: "请输入活动名称", trigger: "blur" } // 直接在触发函数里加 notnull
-          // { validator: this.checkName, trigger: "blur" }
-        ],
-        region: [
-          { required: true, message: "请选择活动区域", trigger: "change" }
-        ]
+        // name: [
+        //   // { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        //   { required: true, message: "请输入活动名称", trigger: "blur" }, // 直接在触发函数里加 notnull
+        //   { validator:function (rule, value, callback) { check.checkDecimal(rule, value, callback, _this) }, trigger: "blur" }
+        // ],
+        // date: [
+        //   { required: true, message: "请输入日期", trigger: "blur" } // 直接在触发函数里加 notnull
+        //   // { validator: this.checkName, trigger: "blur" }
+        // ],
+        // region: [
+        //   { required: true, message: "请选择活动区域", trigger: "change" }
+        // ]
       }
     };
   },
-  methods: {
-    confugureFormatter(configure, key) {
-      // key对应code, value对应转换后的值
-      if (configure) {
-        let matchObj = configure.filter(e => e.key === key);
-        if (matchObj[0]) {
-          return matchObj[0].value;
-        }
+  computed: {
+    _rules() {
+      const rules = {}
+      var checkName = () => {}
+      const type = {
+        required: { required: true, message: "请输入", trigger: "blur" },
+        min_max: { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+        validator: { validator:function (rule, value, callback) { check[checkName](rule, value, callback, _this) }, trigger: "blur" }
       }
+      // configs  根据config里是否有rule属性来判断是否验证 rule类型-数组
+      this.configs.forEach(config => {
+        if(! ('rule' in config)) { return }
+          rules[config.field] = [] //字段验证数组
+          config && config.rule.forEach(e => { // e
+            if(!e) { return }
+            typeof e === "string" && e === 'required' && (rules[config.field].push(type['required']))
+            this.isType(e, "Object") && ('min' in e) && ('max' in e) &&  (rules[config.field].push(type['min_max']))
+            // console.log(this.isType(e), '------')
+            if(this.isType(e, "Object") && ('checkName' in e)) {
+              checkName = e.checkName //加载验证名称
+              rules[config.field].push(type['validator']) // 填充验证函数
+            }
+          })
+      })
+      console.log(rules)
+      return rules
+    }
+  },
+  methods: {
+      submitForm(formName) {
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          alert("submit!");
+        } else {
+          console.log("error submit!!");
+          return false;
+        }
+      });
     },
     ceshi(v) {
-      this.ruleForm
-      console.log(v, 111666)
+      // this.ruleForm
+      console.log(v, 99999999)
     },
-    submitForm() {
+    /* 初始化表单 */
+    initData(configItem) {
+     const _this =this
+     const waiting = {
+          input: (
+              <el-input v-model={_this.data[configItem.field]} clearable></el-input>
+          ),
+          select: (
+              <searchSelect insertValue={_this.data[configItem.field]} {...{ on: { 'update:insertValue': (val) => { _this.data[configItem.field] = val; } } } } configure={configItem.config} isNumber={true} />
+          ),
+          date: (
+              <el-date-picker
+                type="date"
+                placeholder="选择日期"
+                value-format="yyyy-MM-dd"
+                v-model={_this.data[configItem.field]}
+                style="width: 100%;"
+              ></el-date-picker>
+          )
+        }
+        return (
+          <el-form-item label={configItem.label} prop={configItem.field} >
+                {waiting[configItem.type]}
+          </el-form-item>
+        )
+    },
+  /*     submitForm() {
       // 验证username不为空且长度在2-10之间
       let checkUsername = this.$validate({
         label: "username",
@@ -175,33 +235,39 @@ export default {
         checkPassword
       };
       console.log(validataObj);
-    },
-    validateField(formName) {
-      this.$refs[formName].validateField("name");
-    },
+    }, */
+
+    // validateField(formName) {
+    //   this.$refs[formName].validateField("name");
+    // },
     // 检测活动名称
-    checkName(rule, value, callback) {
-      console.log("rule, value, callback");
-      console.log(rule);
-      // callback(new Error('check.message'))
-      // this.$validate()
-      // debugger
-      let {check} = this.$validate({
-        label: "活动名称",
-        value,
-        rules: ["notnull", "length"],
-        conditions: ["2", "10"]
-      });
-      this.isCallback(check, callback);
+    // checkName(rule, value, callback) {
+    //   console.log("rule, value, callback");
+    //   console.log(rule);
+    //   // callback(new Error('check.message'))
+    //   // this.$validate()
+    //   // debugger
+    //   // let {check} = this.$validate({
+    //   //   label: "活动名称",
+    //   //   value,
+    //   //   rules: ["notnull", "length"],
+    //   //   conditions: ["2", "10"]
+    //   // });
+    //   const check = {message: '测试通过'}
+    //   this.isCallback(check, callback);
+    // },
+    /* 监测数据类型 */
+    isType(target, type) {
+     return Object.prototype.toString.call(target).slice(8, -1) === type
     },
-    // 是否通过callback
-    isCallback(check, callback) {
-      if (!check.result) {
-        return callback(new Error(check.message));
-      } else {
-        return callback();
-      }
-    },
+    // // 是否通过callback
+    // isCallback(check, callback) {
+    //   if (!check.result) {
+    //     return callback(new Error(check.message));
+    //   } else {
+    //     return callback();
+    //   }
+    // },
     // 表单过滤输入(输入值, 正则, 匹配后输入与否)
     isInput(val, reg, flag) {
       if (!val) {
@@ -228,10 +294,9 @@ export default {
           return;
       }
     }
-  }
-  //   created(){
-  //       console.log(this.$validate)
-  //   }
+  },
+    mounted(){
+    }
 };
 </script>
 

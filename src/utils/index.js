@@ -58,7 +58,6 @@ export function isType2(value, type) {
  * @param {*} now 检测现在的值
  */
 export function noSame(old, now) {
-  
   // 数据类型不同, 或 null ,undefined
   if (isType2(old) !== isType2(now)) {
       return true;
@@ -160,7 +159,6 @@ export function deleteItem(Obj, target, key) {
  *  返回包含在字段内的所有对象数组
  */
 export function filterObjArray(ObjArr, valInput, keyMap) {
-  debugger
   // console.log("valInput");
   // console.log(typeof valInput);
   // debugger
