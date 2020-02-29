@@ -25,19 +25,22 @@ export default {
       father: { type: Object, default: _ => {} }           
   },
   created() {
-    this.father.son = 1
+    console.log(this.search, 'create');
+    this.initForm()
   },
   data() {
       return {
         configs: [
           {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}]},
-          {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {checkName: 'checkDecimal'}]},
+          {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: true, warning: '测试'}]},
+          {type: 'input', field: 'name2-2', label: '活动名称2-2:', rule: ['required', {isInfluence: false, warning: '测试2-2'}]},
+          {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
           // {type: 'date', field: 'date', label: '日期:'},
           {type: 'date', field: {start: 'start', end: 'end', timeDefault: 'timeDefault'}, label: '日期:'},
           {type: 'select',config:configue_area, field: 'region', label: '活动区域'}
         ],
         search: {
-          name: '',
+          name: '5',
           name2: '',
           date: '',
           start: '',
@@ -48,6 +51,17 @@ export default {
       }
   },
   methods: {
+    initForm() {
+     this.configs = [
+          {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}]},
+          {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: true, warning: '测试'}]},
+          {type: 'input', field: 'name2_2', label: '活动名称2-2:', rule: ['required', {isInfluence: this.search.name, warning: '测试2-2'}]},
+          {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
+          // {type: 'date', field: 'date', label: '日期:'},
+          {type: 'date', field: {start: 'start', end: 'end', timeDefault: 'timeDefault'}, label: '日期:'},
+          {type: 'select',config:configue_area, field: 'region', label: '活动区域'}
+        ]
+    },
     submitForm(formName) {
       this.$refs[formName].$refs.Form.validate(valid => {
         if (valid) {

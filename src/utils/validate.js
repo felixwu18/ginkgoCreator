@@ -6,6 +6,10 @@ const regConfigs = {
     checkDecimal: {
         reg: /((^[1-9]\d*)|^0)(\.\d{0,1}){0,1}$/,
         warning: '必须正数保留两位小数'
+    },
+    checkDecimal2: {
+        reg: /((^[1-9]\d*)|^0)(\.\d{0,1}){0,1}$/,
+        warning: '必须正数保留两位小数--2'
     }
 }
 
@@ -24,6 +28,12 @@ function define(checkName, regConfig) {
         //     form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据
         //     return callback(new Error(warning))
         // } else 
+        reg
+        warning
+        // debugger
+        console.log(reg, warning, '-----tip');
+        
+
         if (reg.test(value)) {
             form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据
             return callback(new Error(warning))

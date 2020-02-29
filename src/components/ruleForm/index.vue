@@ -44,7 +44,6 @@
 import searchSelect from "@/components/searchSelect/index"
 import deteSelector from "@/components/DateSelector/index"
 import check from"@/utils/validate"
-var _this = {} // 拿表单this, 便于在外js文件里处理表单值清除，禁用或隐藏控制
 
 const demo = {
   name: 'demo',
@@ -124,7 +123,6 @@ export default {
     deteSelector
   },
   data() {
-    _this = this
     return {
       // search: {
       //   start: "",
@@ -158,34 +156,58 @@ export default {
   },
   computed: {
     _rules() {
+      // this.data
+      // debugger
       const rules = {}
-      var checkName = () => {}
+      var checkName = ''
+      var condition = {isInfluence: true, warning: '请正确输入'}
       const type = {
         required: { required: true, message: "请输入", trigger: "blur" },
         min_max: { min: 3, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
-        validator: { validator:function (rule, value, callback) { check[checkName](rule, value, callback, _this) }, trigger: "blur" }
+        validator: { validator: (rule, value, callback) => { check[checkName](rule, value, callback, this) }, trigger: "blur" },
+        influence: { validator: (rule, value, callback) => { this.influence(rule, value, callback, condition) }, trigger: "blur" } // 关联验证
       }
       // configs  根据config里是否有rule属性来判断是否验证 rule类型-数组
       this.configs.forEach(config => {
         if(! ('rule' in config)) { return }
-          rules[config.field] = [] //字段验证数组
+          rules[config.field] = [] //字段验证数组init
           config && config.rule.forEach(e => { // e
             if(!e) { return }
             typeof e === "string" && e === 'required' && (rules[config.field].push(type['required']))
             this.isType(e, "Object") && ('min' in e) && ('max' in e) &&  (rules[config.field].push(type['min_max']))
             // console.log(this.isType(e), '------')
             if(this.isType(e, "Object") && ('checkName' in e)) {
-              checkName = e.checkName //加载验证名称
-              typeof config.field === "string" ? '' : config.field = config.field.timeDefault
+              var checkName = e.checkName //加载验证名称
+              type['validator'] = { validator: (rule, value, callback) => { check[checkName](rule, value, callback, this) }, trigger: "blur" }
+              // typeof config.field === "string" ? '' : config.field = config.field.timeDefault
               rules[config.field].push(type['validator']) // 填充验证函数
+
+            } else if(this.isType(e, "Object") && ('isInfluence' in e)) {
+             var condition = e // 关联验证条件
+            //  e.isInfluence
+            //  {isInfluence: true, warning: '请正确输入'}
+              // e.isInfluence = this.data[e.isInfluence]
+              type['influence'] = { validator: (rule, value, callback) => { this.influence(rule, value, callback, condition) }, trigger: "blur" }
+              rules[config.field].push(type['influence'])
+              // console.log(condition, 'cecececeeceeeee');
+              
             }
           })
       })
       console.log(rules, '11111')
+      window.rule = rules
       return rules
     }
   },
   methods: {
+      influence(rule, value, callback, condition) {
+        if (condition.isInfluence) {
+            // form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据
+            return callback(new Error(condition.warning))
+        } else {
+            callback()
+        }
+      },
       submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
@@ -203,7 +225,7 @@ export default {
     },
     /* 初始化表单 */
     initData(configItem) {
-      const _this =this
+     const _this =this
      const waiting = {
           input: (
               <el-input v-model={_this.data[configItem.field]} clearable></el-input>
