@@ -32,14 +32,18 @@ export default {
         configs: [
           {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}]},
           {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {checkName: 'checkDecimal'}]},
-          {type: 'date', field: 'date', label: '日期:'},
+          // {type: 'date', field: 'date', label: '日期:'},
+          {type: 'date', field: {start: 'start', end: 'end', timeDefault: 'timeDefault'}, label: '日期:'},
           {type: 'select',config:configue_area, field: 'region', label: '活动区域'}
         ],
         search: {
           name: '',
           name2: '',
           date: '',
-          region: ''
+          start: '',
+          end: '',
+          region: '',
+          timeDefault: []
         }
       }
   },
@@ -58,6 +62,7 @@ export default {
      ceshi(){
          console.log('ceshi', this.search)
          this.search.name = 666
+         this.search.timeDefault = ["2019-10-1", "2019-10-1"]
         //  this.toList()
      },
      toList() {

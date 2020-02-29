@@ -1,7 +1,6 @@
 <template>
 <!-- <div>
-  <el-button type="primary" @click="submitForm('Form')">ç«‹å³åˆ›å»ºinner</el-button> -->
-    <!-- <button @click="ceshi" @change="ceshi">ceshi</button> -->
+  <el-button type="primary" @click="submitForm('Form')">Á¢¼´´´½¨inner</el-button> -->
   <el-form
     :model="data"
     :rules="_rules"
@@ -14,14 +13,15 @@
     <demo />
 
 
-    <!-- <el-form-item label="æ´»åŠ¨åç§°" prop="name" ref="nameItem">
+    <!-- <button @click="ceshi" @change="ceshi">ceshi</button> -->
+    <!-- <el-form-item label="»î¶¯Ãû³Æ" prop="name" ref="nameItem">
       <el-input v-model="ruleForm.name" clearable></el-input>
     </el-form-item> -->
-    <!-- <el-form-item label="æ´»åŠ¨åŒºåŸŸ" prop="region">
+    <!-- <el-form-item label="»î¶¯ÇøÓò" prop="region">
       <searchSelect :insertValue.sync="ruleForm.region" :configure="configue_area" :isNumber="true" />
     </el-form-item> -->
-    <!-- æµ‹è¯•é™é»˜é˜»æ­¢ä¸åˆè§„å†…å®¹ -->
-    <!-- <el-form-item label="åªèƒ½æ•°å­—" prop="input">
+    <!-- ²âÊÔ¾²Ä¬×èÖ¹²»ºÏ¹æÄÚÈİ -->
+    <!-- <el-form-item label="Ö»ÄÜÊı×Ö" prop="input">
       <el-input
         v-model="ruleForm.input"
         :disabled="isDisable('input_notNumber', ruleForm.region)"
@@ -29,7 +29,7 @@
         clearable
       ></el-input>
     </el-form-item>
-    <el-form-item label="ä¸èƒ½æ•°å­—" prop="notNumber">
+    <el-form-item label="²»ÄÜÊı×Ö" prop="notNumber">
       <el-input
         v-model="ruleForm.notNumber"
         :disabled="isDisable('input_notNumber', ruleForm.region)"
@@ -44,7 +44,7 @@
 import searchSelect from "@/components/searchSelect/index"
 import deteSelector from "@/components/DateSelector/index"
 import check from"@/utils/validate"
-var _this = {} // æ‹¿è¡¨å•this, ä¾¿äºåœ¨å¤–jsæ–‡ä»¶é‡Œå¤„ç†è¡¨å•å€¼æ¸…é™¤ï¼Œç¦ç”¨æˆ–éšè—æ§åˆ¶
+var _this = {} // ÄÃ±íµ¥this, ±ãÓÚÔÚÍâjsÎÄ¼şÀï´¦Àí±íµ¥ÖµÇå³ı£¬½ûÓÃ»òÒş²Ø¿ØÖÆ
 
 const demo = {
   name: 'demo',
@@ -61,33 +61,33 @@ const demo = {
     // const ruleForm = props.ruleForm
     // const test = {
     //   input: (
-    //     <el-form-item label="æ´»åŠ¨åç§°" prop="name" ref="nameItem">
+    //     <el-form-item label="»î¶¯Ãû³Æ" prop="name" ref="nameItem">
     //       <el-input v-model={ruleForm.name} clearable></el-input>
     //     </el-form-item>
     //   ),
     //   select: (
-    //     // <el-form-item label="æ´»åŠ¨åŒºåŸŸ" prop="region">
+    //     // <el-form-item label="»î¶¯ÇøÓò" prop="region">
     //     //   <el-select
     //     //     v-model={ruleForm.region}
     //     //     // disabled={parent.isDisable('region', ruleForm.name)}
     //     //     clearable
-    //     //     placeholder="è¯·é€‰æ‹©æ´»åŠ¨åŒºåŸŸ"
+    //     //     placeholder="ÇëÑ¡Ôñ»î¶¯ÇøÓò"
     //     //     // v-on={ctx.listseners}
     //     //     onChange={parent.ceshi}
     //     //     // v-bind={$attrs}
     //     //   >
-    //     //     <el-option label="åŒºåŸŸä¸€" value="0"></el-option>
-    //     //     <el-option label="åŒºåŸŸäºŒ" value="1"></el-option>
+    //     //     <el-option label="ÇøÓòÒ»" value="0"></el-option>
+    //     //     <el-option label="ÇøÓò¶ş" value="1"></el-option>
     //     //   </el-select>
     //     // </el-form-item>
     //     <searchSelect insertValue={parent.data.region} configure={parent.configs[1].config} is-number={true} />
     //             // <div> 666 </div>
     //   ),
     //   date: (
-    //      <el-form-item label="æ—¥æœŸ" prop="date">
+    //      <el-form-item label="ÈÕÆÚ" prop="date">
     //       <el-date-picker 
     //         type="date"
-    //         placeholder="é€‰æ‹©æ—¥æœŸ"
+    //         placeholder="Ñ¡ÔñÈÕÆÚ"
     //         v-model={ruleForm.date}
     //         style="width: 100%;"
     //       ></el-date-picker>
@@ -101,10 +101,10 @@ const demo = {
   }
 }
 
-// é…ç½®è½¬æ¢
+// ÅäÖÃ×ª»»
 const configue_area = [
-  { key: 1, value: "åŒºåŸŸä¸€" },
-  { key: 2, value: "åŒºåŸŸäºŒ" }
+  { key: 1, value: "ÇøÓòÒ»" },
+  { key: 2, value: "ÇøÓò¶ş" }
 ];
 
 export default {
@@ -142,16 +142,16 @@ export default {
       // },
       rules: {
         // name: [
-        //   // { min: 3, max: 5, message: "é•¿åº¦åœ¨ 3 åˆ° 5 ä¸ªå­—ç¬¦", trigger: "blur" },
-        //   { required: true, message: "è¯·è¾“å…¥æ´»åŠ¨åç§°", trigger: "blur" }, // ç›´æ¥åœ¨è§¦å‘å‡½æ•°é‡ŒåŠ  notnull
+        //   // { min: 3, max: 5, message: "³¤¶ÈÔÚ 3 µ½ 5 ¸ö×Ö·û", trigger: "blur" },
+        //   { required: true, message: "ÇëÊäÈë»î¶¯Ãû³Æ", trigger: "blur" }, // Ö±½ÓÔÚ´¥·¢º¯ÊıÀï¼Ó notnull
         //   { validator:function (rule, value, callback) { check.checkDecimal(rule, value, callback, _this) }, trigger: "blur" }
         // ],
         // date: [
-        //   { required: true, message: "è¯·è¾“å…¥æ—¥æœŸ", trigger: "blur" } // ç›´æ¥åœ¨è§¦å‘å‡½æ•°é‡ŒåŠ  notnull
+        //   { required: true, message: "ÇëÊäÈëÈÕÆÚ", trigger: "blur" } // Ö±½ÓÔÚ´¥·¢º¯ÊıÀï¼Ó notnull
         //   // { validator: this.checkName, trigger: "blur" }
         // ],
         // region: [
-        //   { required: true, message: "è¯·é€‰æ‹©æ´»åŠ¨åŒºåŸŸ", trigger: "change" }
+        //   { required: true, message: "ÇëÑ¡Ôñ»î¶¯ÇøÓò", trigger: "change" }
         // ]
       }
     };
@@ -161,23 +161,23 @@ export default {
       const rules = {}
       var checkName = () => {}
       const type = {
-        required: { required: true, message: "è¯·è¾“å…¥", trigger: "blur" },
-        min_max: { min: 3, max: 5, message: "é•¿åº¦åœ¨ 3 åˆ° 5 ä¸ªå­—ç¬¦", trigger: "blur" },
+        required: { required: true, message: "ÇëÊäÈë", trigger: "blur" },
+        min_max: { min: 3, max: 5, message: "³¤¶ÈÔÚ 3 µ½ 5 ¸ö×Ö·û", trigger: "blur" },
         validator: { validator:function (rule, value, callback) { check[checkName](rule, value, callback, _this) }, trigger: "blur" }
       }
-      // configs  æ ¹æ®configé‡Œæ˜¯å¦æœ‰ruleå±æ€§æ¥åˆ¤æ–­æ˜¯å¦éªŒè¯ ruleç±»å‹-æ•°ç»„
+      // configs  ¸ù¾İconfigÀïÊÇ·ñÓĞruleÊôĞÔÀ´ÅĞ¶ÏÊÇ·ñÑéÖ¤ ruleÀàĞÍ-Êı×é
       this.configs.forEach(config => {
         if(! ('rule' in config)) { return }
-          rules[config.field] = [] //å­—æ®µéªŒè¯æ•°ç»„
+          rules[config.field] = [] //×Ö¶ÎÑéÖ¤Êı×é
           config && config.rule.forEach(e => { // e
             if(!e) { return }
             typeof e === "string" && e === 'required' && (rules[config.field].push(type['required']))
             this.isType(e, "Object") && ('min' in e) && ('max' in e) &&  (rules[config.field].push(type['min_max']))
             // console.log(this.isType(e), '------')
             if(this.isType(e, "Object") && ('checkName' in e)) {
-              checkName = e.checkName //åŠ è½½éªŒè¯åç§°
+              checkName = e.checkName //¼ÓÔØÑéÖ¤Ãû³Æ
               typeof config.field === "string" ? '' : config.field = config.field.timeDefault
-              rules[config.field].push(type['validator']) // å¡«å……éªŒè¯å‡½æ•°
+              rules[config.field].push(type['validator']) // Ìî³äÑéÖ¤º¯Êı
             }
           })
       })
@@ -198,10 +198,9 @@ export default {
     },
     ceshi(v) {
       // this.ruleForm
-      console.log(this.data, 99999999)
-      this.data
+      console.log(v, 99999999)
     },
-    /* åˆå§‹åŒ–è¡¨å• */
+    /* ³õÊ¼»¯±íµ¥ */
     initData(configItem) {
       const _this =this
      const waiting = {
@@ -213,7 +212,7 @@ export default {
           ),
           date: (
               <deteSelector
-                title="æ—¥æœŸ"
+                title="ÈÕÆÚ"
                 // timeDefault={_this.data[configItem.field.timeDefault]}
                 timeDefault={_this.data[configItem.field.timeDefault]}
                 start={_this.data[configItem.field.start]}
@@ -227,7 +226,7 @@ export default {
       // end.sync="search.end"
       // <el-date-picker
       //   type="date"
-      //   placeholder="é€‰æ‹©æ—¥æœŸ"
+      //   placeholder="Ñ¡ÔñÈÕÆÚ"
       //   value-format="yyyy-MM-dd"
       //   v-model={_this.data[configItem.field]}
       //   style="width: 100%;"
@@ -240,14 +239,14 @@ export default {
         )
     },
   /*     submitForm() {
-      // éªŒè¯usernameä¸ä¸ºç©ºä¸”é•¿åº¦åœ¨2-10ä¹‹é—´
+      // ÑéÖ¤username²»Îª¿ÕÇÒ³¤¶ÈÔÚ2-10Ö®¼ä
       let checkUsername = this.$validate({
         label: "username",
         value: "admin",
         rules: ["notnull", "length"],
         conditions: ["2", "10"]
       });
-      // éªŒè¯passwordç”±å¤§å°å†™å­—æ¯+æ•°å­—ç»„æˆçš„6-16ä½å¯†ç 
+      // ÑéÖ¤passwordÓÉ´óĞ¡Ğ´×ÖÄ¸+Êı×Ö×é³ÉµÄ6-16Î»ÃÜÂë
       let checkPassword = this.$validate({
         label: "pawwword",
         value: "lllyh111",
@@ -263,7 +262,7 @@ export default {
     // validateField(formName) {
     //   this.$refs[formName].validateField("name");
     // },
-    // æ£€æµ‹æ´»åŠ¨åç§°
+    // ¼ì²â»î¶¯Ãû³Æ
     // checkName(rule, value, callback) {
     //   console.log("rule, value, callback");
     //   console.log(rule);
@@ -271,19 +270,19 @@ export default {
     //   // this.$validate()
     //   // debugger
     //   // let {check} = this.$validate({
-    //   //   label: "æ´»åŠ¨åç§°",
+    //   //   label: "»î¶¯Ãû³Æ",
     //   //   value,
     //   //   rules: ["notnull", "length"],
     //   //   conditions: ["2", "10"]
     //   // });
-    //   const check = {message: 'æµ‹è¯•é€šè¿‡'}
+    //   const check = {message: '²âÊÔÍ¨¹ı'}
     //   this.isCallback(check, callback);
     // },
-    /* ç›‘æµ‹æ•°æ®ç±»å‹ */
+    /* ¼à²âÊı¾İÀàĞÍ */
     isType(target, type) {
      return Object.prototype.toString.call(target).slice(8, -1) === type
     },
-    // // æ˜¯å¦é€šè¿‡callback
+    // // ÊÇ·ñÍ¨¹ıcallback
     // isCallback(check, callback) {
     //   if (!check.result) {
     //     return callback(new Error(check.message));
@@ -291,27 +290,27 @@ export default {
     //     return callback();
     //   }
     // },
-    // è¡¨å•è¿‡æ»¤è¾“å…¥(è¾“å…¥å€¼, æ­£åˆ™, åŒ¹é…åè¾“å…¥ä¸å¦)
+    // ±íµ¥¹ıÂËÊäÈë(ÊäÈëÖµ, ÕıÔò, Æ¥ÅäºóÊäÈëÓë·ñ)
     isInput(val, reg, flag) {
       if (!val) {
         return;
       } else if (flag === 0) {
-        // åŒ¹é…æ’é™¤
+        // Æ¥ÅäÅÅ³ı
         return val.replace(reg, "");
       } else if (flag === 1) {
-        // åŒ¹é…è¾“å…¥
+        // Æ¥ÅäÊäÈë
         return reg.test(val) ? val : "";
       } else {
         console.log("isInput can not work");
       }
     },
-    // è¡¨å•ç¦ç”¨é€»è¾‘
+    // ±íµ¥½ûÓÃÂß¼­
     isDisable(controlObj, val) {
       switch (controlObj) {
         case undefined:
-        case "region": // æ´»åŠ¨åŒºåŸŸ
+        case "region": // »î¶¯ÇøÓò
           return val ? false : true;
-        case "input_notNumber": // åªèƒ½æ•°å­—, ä¸èƒ½æ•°å­—
+        case "input_notNumber": // Ö»ÄÜÊı×Ö, ²»ÄÜÊı×Ö
           return !val ? true : val === "1" ? false : true;
         default:
           return;
