@@ -114,8 +114,13 @@ export default {
     },
     data: {
       type: Object,
-      default: () => {}
+      default: () => ({})
     }
+    // ,
+    // father: {
+    //   type: Object,
+    //   default: () => ({})
+    // }
   },
   components: {
     demo,
@@ -200,6 +205,13 @@ export default {
     }
   },
   methods: {
+    copyPropVal(fromObj, toObj) {
+      Object.keys(toObj).forEach(ele => {
+        if (ele in fromObj && !(ele in toObj) && fromObj[ele]) {
+          toObj[ele] = fromObj[ele];
+        }
+      });
+    },
       influence(rule, value, callback, condition) {
         if (condition.isInfluence) {
             // form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据
@@ -209,14 +221,15 @@ export default {
         }
       },
       submitForm(formName) {
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert("submit!");
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
+        this.fn(this.$refs[formName])
+      // this.$refs[formName].validate(valid => {
+      //   if (valid) {
+      //     alert("submit!");
+      //   } else {
+      //     console.log("error submit!!");
+      //     return false;
+      //   }
+      // });
     },
     ceshi(v) {
       // this.ruleForm
@@ -340,7 +353,17 @@ export default {
       }
     }
   },
-    mounted(){
+    mounted() {
+      // this.father.$refs
+      // this.$refs.Form
+      // this.$parent.$refs
+      // this.copyPropVal(this.$refs.Form, )
+      // debugger
+      // setTimeout(() => {
+      //   console.log(this.father);
+      // }, 1000)
+      //  = this.$refs
+      // debugger
     }
 };
 </script>

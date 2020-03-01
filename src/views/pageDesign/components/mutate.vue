@@ -3,7 +3,7 @@
     <h2>修改页面</h2>
     <el-button @click="ceshi">返回列表</el-button>
     <el-button type="primary" @click="submitForm('Form')">立即创建</el-button>
-    <rule-form ref="Form" :configs="configs" :data="search" />
+    <rule-form ref="Form" :configs="configs" :data="search" :fn="submitForm" :father="this" />
   </div>
 </template>
 
@@ -63,7 +63,8 @@ export default {
         ]
     },
     submitForm(formName) {
-      this.$refs[formName].$refs.Form.validate(valid => {
+      // this.$refs[formName].$refs.Form.validate(valid => {
+      this.$refs[formName].validate(valid => {
         if (valid) {
           alert("submit!");
         } else {
@@ -73,7 +74,7 @@ export default {
       });
       // this.$refs[formName].$refs.Form.clearValidate()
     },
-     ceshi(){
+     ceshi() {
          console.log('ceshi', this.search)
          this.search.name = 666
          this.search.timeDefault = ["2019-10-1", "2019-10-1"]
@@ -82,7 +83,7 @@ export default {
      toList() {
         this.active.mutateActive = false           
         this.active.listActive = true           
-     },
+     }
   }
 };
 </script>
