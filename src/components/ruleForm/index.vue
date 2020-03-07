@@ -12,8 +12,6 @@
     v-bind="$attrs"
   >
     <demo />
-
-
     <!-- <el-form-item label="活动名称" prop="name" ref="nameItem">
       <el-input v-model="ruleForm.name" clearable></el-input>
     </el-form-item> -->
@@ -108,14 +106,10 @@ const configue_area = [
 
 export default {
   props: {
-    configs: {
-      type: Array,
-      default: () => []
-    },
-    data: {
-      type: Object,
-      default: () => ({})
-    }
+    configs: { type: Array, default: () => [] },
+    data: { type: Object, default: () => ({}) },
+    inline: { type: Boolean, default: false },
+    disabled: { type: Boolean, default: true }
     // ,
     // father: {
     //   type: Object,
@@ -241,10 +235,19 @@ export default {
      const _this =this
      const waiting = {
           input: (
-              <el-input v-model={_this.data[configItem.field]} clearable></el-input>
+              <el-input 
+                v-model={_this.data[configItem.field]} 
+                disabled={configItem.disabled === false ? false : (configItem.disabled || _this.disabled)} 
+                clearable
+                />
           ),
           select: (
-              <searchSelect insertValue={_this.data[configItem.field]} {...{ on: { 'update:insertValue': (val) => { _this.data[configItem.field] = val; } } } } configure={configItem.config} isNumber={true} />
+              <searchSelect 
+                 insertValue={_this.data[configItem.field]} 
+                 disabled={configItem.disabled === false ? false : (configItem.disabled || _this.disabled)} 
+                 {...{ on: { 'update:insertValue': (val) => { _this.data[configItem.field] = val; } } } } 
+                 configure={configItem.config} isNumber={true}
+                 />
           ),
           date: (
               <deteSelector
@@ -253,6 +256,7 @@ export default {
                 timeDefault={_this.data[configItem.field.timeDefault]}
                 start={_this.data[configItem.field.start]}
                 end={_this.data[configItem.field.end]}
+                disabled={configItem.disabled === false ? false : (configItem.disabled || _this.disabled)}
                 {...{ on: { 'update:start': (val) => { _this.data[configItem.field.start] = val; }, 'update:end': (val) => { _this.data[configItem.field.end] = val; } } } }
               />
           )
