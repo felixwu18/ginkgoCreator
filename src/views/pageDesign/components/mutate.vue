@@ -26,13 +26,16 @@ export default {
   },
   created() {
     console.log(this.search, 'create');
-    this.initForm()
+    // this.initForm()
   },
   data() {
+      console.log(this, '-----thsi')
       return {
         configs: [
-          {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}]},
-          {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: true, warning: '测试'}]},
+          // (function(){console.log(this, 'consigs--this')})(),
+          {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}], disabled: false},
+          {type: 'input', field: 'name', label: '活动名称2:', disabled: false},
+          // {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: this.testFn, warning: '测试'}], disabled: false},
           {type: 'input', field: 'name2-2', label: '活动名称2-2:', rule: ['required', {isInfluence: false, warning: '测试2-2'}]},
           {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
           // {type: 'date', field: 'date', label: '日期:'},
@@ -40,7 +43,7 @@ export default {
           {type: 'select',config:configue_area, field: 'region', label: '活动区域'}
         ],
         search: {
-          name: '5',
+          name: '',
           name2: '',
           date: '',
           start: '',
@@ -51,17 +54,20 @@ export default {
       }
   },
   methods: {
-    initForm() {
-     this.configs = [
-          {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}]},
-          {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: true, warning: '测试'}]},
-          {type: 'input', field: 'name2_2', label: '活动名称2-2:', rule: ['required', {isInfluence: this.search.name, warning: '测试2-2'}]},
-          {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
-          // {type: 'date', field: 'date', label: '日期:'},
-          {type: 'date', field: {start: 'start', end: 'end', timeDefault: 'timeDefault'}, label: '日期:'},
-          {type: 'select',config:configue_area, field: 'region', label: '活动区域'}
-        ]
+    testFn() {
+      return this.search.name < this.search.name2
     },
+    // initForm() {
+    //  this.configs = [
+    //       {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}], disabled: false},
+    //       {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: true, warning: '测试'}]},
+    //       {type: 'input', field: 'name2_2', label: '活动名称2-2:', rule: ['required', {isInfluence: this.search.name, warning: '测试2-2'}], disabled: false},
+    //       {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
+    //       // {type: 'date', field: 'date', label: '日期:'},
+    //       {type: 'date', field: {start: 'start', end: 'end', timeDefault: 'timeDefault'}, label: '日期:'},
+    //       {type: 'select',config:configue_area, field: 'region', label: '活动区域'}
+    //     ]
+    // },
     submitForm(formName) {
       // this.$refs[formName].$refs.Form.validate(valid => {
       this.$refs[formName].validate(valid => {
@@ -76,7 +82,7 @@ export default {
     },
      ceshi() {
          console.log('ceshi', this.search)
-         this.search.name = 666
+        //  this.search.name = 666
          this.search.timeDefault = ["2019-10-1", "2019-10-1"]
         //  this.toList()
      },

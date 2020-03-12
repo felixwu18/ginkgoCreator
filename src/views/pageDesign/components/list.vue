@@ -11,7 +11,7 @@
       <!-- minxin  -->
       <el-button @click="testMixin">点击 ceshi mixin</el-button>
       <mixin-test-button />
-    </div>
+  </div>
 </template>
 
 <script>

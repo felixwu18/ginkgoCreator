@@ -26,15 +26,14 @@ const tableHead = [
     { prop: "zip", label: "邮编" }
   ];
 
-  
 export default {
     components: {
         mixinTestButton
     },
     data() {
-        return {
-            tableHead
-        }
+      return {
+        tableHead
+      }
     },
     // provide() {
     //     ttt: this

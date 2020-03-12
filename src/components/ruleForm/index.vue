@@ -175,21 +175,22 @@ export default {
             typeof e === "string" && e === 'required' && (rules[config.field].push(type['required']))
             this.isType(e, "Object") && ('min' in e) && ('max' in e) &&  (rules[config.field].push(type['min_max']))
             // console.log(this.isType(e), '------')
+            /* 正则验证 */
             if(this.isType(e, "Object") && ('checkName' in e)) {
               var checkName = e.checkName //加载验证名称
               type['validator'] = { validator: (rule, value, callback) => { check[checkName](rule, value, callback, this) }, trigger: "blur" }
               // typeof config.field === "string" ? '' : config.field = config.field.timeDefault
               rules[config.field].push(type['validator']) // 填充验证函数
-
+            /* 关联验证 */
             } else if(this.isType(e, "Object") && ('isInfluence' in e)) {
              var condition = e // 关联验证条件
+
             //  e.isInfluence
             //  {isInfluence: true, warning: '请正确输入'}
               // e.isInfluence = this.data[e.isInfluence]
               type['influence'] = { validator: (rule, value, callback) => { this.influence(rule, value, callback, condition) }, trigger: "blur" }
               rules[config.field].push(type['influence'])
               // console.log(condition, 'cecececeeceeeee');
-              
             }
           })
       })
@@ -206,14 +207,15 @@ export default {
         }
       });
     },
-      influence(rule, value, callback, condition) {
-        if (condition.isInfluence) {
-            // form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据
-            return callback(new Error(condition.warning))
-        } else {
-            callback()
-        }
-      },
+    influence(rule, value, callback, condition) {
+      this.isType(condition.isInfluence, "Function") || (condition.isInfluence = () => {})
+      if (condition.isInfluence()) {
+          // form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据
+          return callback(new Error(condition.warning))
+      } else {
+          callback()
+      }
+    },
       submitForm(formName) {
         this.fn(this.$refs[formName])
       // this.$refs[formName].validate(valid => {
@@ -232,20 +234,24 @@ export default {
     },
     /* 初始化表单 */
     initData(configItem) {
-     const _this =this
+     var _disabled = (configItem.disabled === false ? false : (configItem.disabled || this.disabled))
+     const _data =this.data
      const waiting = {
           input: (
-              <el-input 
-                v-model={_this.data[configItem.field]} 
-                disabled={configItem.disabled === false ? false : (configItem.disabled || _this.disabled)} 
+              <el-input
+                // v-model={_data[configItem.field]}
+                // vModel_trim={_data[configItem.field]} // 去空格，有bug
+                value={_data[configItem.field]}
+                on-input={val => _data[configItem.field] = val.trim()}
+                disabled={_disabled}
                 clearable
                 />
           ),
           select: (
               <searchSelect 
-                 insertValue={_this.data[configItem.field]} 
-                 disabled={configItem.disabled === false ? false : (configItem.disabled || _this.disabled)} 
-                 {...{ on: { 'update:insertValue': (val) => { _this.data[configItem.field] = val; } } } } 
+                 insertValue={_data[configItem.field]} 
+                 {...{ on: { 'update:insertValue': (val) => { _data[configItem.field] = val; } } } } 
+                 disabled={_disabled}
                  configure={configItem.config} isNumber={true}
                  />
           ),
@@ -253,11 +259,11 @@ export default {
               <deteSelector
                 title="日期"
                 // timeDefault={_this.data[configItem.field.timeDefault]}
-                timeDefault={_this.data[configItem.field.timeDefault]}
-                start={_this.data[configItem.field.start]}
-                end={_this.data[configItem.field.end]}
-                disabled={configItem.disabled === false ? false : (configItem.disabled || _this.disabled)}
-                {...{ on: { 'update:start': (val) => { _this.data[configItem.field.start] = val; }, 'update:end': (val) => { _this.data[configItem.field.end] = val; } } } }
+                timeDefault={_data[configItem.field.timeDefault]}
+                start={_data[configItem.field.start]}
+                end={_data[configItem.field.end]}
+                disabled={_disabled}
+                {...{ on: { 'update:start': (val) => { _data[configItem.field.start] = val; }, 'update:end': (val) => { _data[configItem.field.end] = val; } } } }
               />
           )
           // ["2019-10-1", "2019-10-1"]
@@ -272,11 +278,21 @@ export default {
       //   style="width: 100%;"
       // ></el-date-picker>
         }
-        return (
-          <el-form-item label={configItem.label} prop={(typeof configItem.field === 'string') ? configItem.field : configItem.field.start} >
-                {waiting[configItem.type]}
-          </el-form-item>
-        )
+        var ele 
+        if('rule' in configItem) {
+          ele = (
+                  <el-form-item label={configItem.label}  prop={(typeof configItem.field === 'string') ? configItem.field : configItem.field.start} >
+                        {waiting[configItem.type]}
+                  </el-form-item>
+            )
+        }else {
+          ele = (
+                  <el-form-item label={configItem.label} >
+                        {waiting[configItem.type]}
+                  </el-form-item>
+            )
+        }
+        return ele
     },
   /*     submitForm() {
       // 验证username不为空且长度在2-10之间
