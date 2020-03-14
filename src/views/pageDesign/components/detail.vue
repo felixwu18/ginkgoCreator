@@ -24,7 +24,9 @@ export default {
       father: { type: Object, default: _ => {} }           
   },
   data() {
+    var classNma = 'none'
       return {
+        classNma,
         detail: {          
           name: '',
           name2: '',
@@ -35,9 +37,8 @@ export default {
           timeDefault: []
           },
         configs: [
-          // (function(){console.log(this, 'consigs--this')})(),
-          {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}], disabled: true},
-          {type: 'input', field: 'name', label: '活动名称2:', disabled: false},
+          {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}], disabled: false},
+          {type: 'input', field: 'name1', label: '活动名称2:',disabled: true, isNone: false },
           // {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: this.testFn, warning: '测试'}], disabled: false},
           {type: 'input', field: 'name2-2', label: '活动名称2-2:', rule: ['required', {isInfluence: false, warning: '测试2-2'}]},
           {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
@@ -45,12 +46,27 @@ export default {
           {type: 'date', field: 'timeDefault', label: '日期:', rule: ['require']},
           {type: 'select',config:configue_area, field: 'region', label: '活动区域'}
         ],
-      }            
+      }
+  },
+  created() {
+  },
+  computed: {
+    seachName() {
+      return this.detail.name
+    },
+  },
+  watch: {
+    'detail.name': function(val) {
+      val ? (this.configs[1].isNone = false) : (this.configs[1].isNone = true)
+      val&&setTimeout(_ => {this.configs[1].disabled = false}, 1000)
+      val||(this.configs[1].disabled = true)
+    }
   },
   methods: {
      ceshi() {
          console.log('ceshi')
-         this.toList()
+        //  this.toList()
+        this.configs[1].className = ''
      },
      toList() {
         this.active.detailActive = false           

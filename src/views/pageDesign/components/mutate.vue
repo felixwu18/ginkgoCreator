@@ -22,7 +22,7 @@ export default {
   },
   props: {
       active: { type: Object, default: _ => {} },            
-      father: { type: Object, default: _ => {} }           
+      father: { type: Object, default: _ => {} }          
   },
   created() {
     console.log(this.search, 'create');
@@ -35,9 +35,9 @@ export default {
           // (function(){console.log(this, 'consigs--this')})(),
           {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}], disabled: true},
           {type: 'input', field: 'name', label: '活动名称2:', disabled: false},
-          // {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: this.testFn, warning: '测试'}], disabled: false},
-          {type: 'input', field: 'name2-2', label: '活动名称2-2:', rule: ['required', {isInfluence: false, warning: '测试2-2'}]},
-          {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
+          {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: this.testFn, warning: '测试'}], disabled: false},
+          // {type: 'input', field: 'name2-2', label: '活动名称2-2:', rule: ['required', {isInfluence: false, warning: '测试2-2'}]},
+          // {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
           // {type: 'date', field: 'date', label: '日期:'},
           {type: 'date', field: 'timeDefault', label: '日期:', rule: ['require']},
           {type: 'select',config:configue_area, field: 'region', label: '活动区域'}

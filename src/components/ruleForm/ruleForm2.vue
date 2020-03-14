@@ -109,7 +109,7 @@ export default {
     configs: { type: Array, default: () => [] },
     data: { type: Object, default: () => ({}) },
     inline: { type: Boolean, default: false },
-    disabled: { type: Boolean, default: true }
+    disabled: { type: Boolean, default: false }
     // ,
     // father: {
     //   type: Object,
@@ -237,24 +237,30 @@ export default {
     /* 初始化表单 */
     initData(configItem) {
      var _disabled = (configItem.disabled === false ? false : (configItem.disabled || this.disabled))
+     console.log(_disabled, '_disabled------');
+     
      const _data =this.data
      const inputAttrs = {
-       value: _data[configItem.field],
+      //  value: _data[configItem.field],
        disabled: _disabled
      }
-     const inputEvent = {
-       click: this.ceshi
-     }
+    //  const inputEvent = {
+    //    click: this.ceshi
+    //  }
+    // class控制样式
+    const className = configItem.className ? {[configItem.className]: true} : ''
     const waiting = {
           input: (
               <el-input
-                // v-model={_data[configItem.field]}
+                v-model={_data[configItem.field]}
                 // vModel_trim={_data[configItem.field]} // 去空格，有bug
+
                 // value={_data[configItem.field]}
                 // disabled={_disabled}
                 {...{ attrs: inputAttrs }}
                 on-input={val => _data[configItem.field] = val.trim()}
-                {...{on: inputEvent}}
+                // style={{background: 'red',display: none}}
+                class={className}
                 clearable
                 />
           ),
@@ -263,6 +269,7 @@ export default {
                  insertValue={_data[configItem.field]} 
                  {...{ on: { 'update:insertValue': (val) => { _data[configItem.field] = val; } } } } 
                  disabled={_disabled}
+                 class={className}
                  configure={configItem.config} isNumber={true}
                  />
           ),
@@ -274,6 +281,7 @@ export default {
                 start={_data[configItem.field.start]}
                 end={_data[configItem.field.end]}
                 disabled={_disabled}
+                class={className}
                 {...{ on: { 'update:start': (val) => { _data[configItem.field.start] = val; }, 'update:end': (val) => { _data[configItem.field.end] = val; } } } }
               />
           )
@@ -289,9 +297,10 @@ export default {
       //   style="width: 100%;"
       // ></el-date-picker>
         }
+        const isNone = configItem.isNone ? 'none' : ''
         const itemProp = 'rule' in configItem ? ( (typeof configItem.field === 'string') ? configItem.field : configItem.field.timeDefault) : ''
         return (
-              <el-form-item label={configItem.label} prop={itemProp} >
+              <el-form-item label={configItem.label} prop={itemProp} class={{none: isNone}} >
                     {waiting[configItem.type]}
               </el-form-item>
             )
@@ -391,4 +400,10 @@ export default {
 </script>
 
 <style>
+.red {
+  background: red
+}
+.none {
+  display: none;
+}
 </style>
