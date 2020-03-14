@@ -232,59 +232,65 @@ export default {
     ceshi(v) {
       // this.ruleForm
       console.log(this.data, 99999999)
+      debugger
       this.data
     },
     /* 初始化表单 */
     initData(configItem) {
      var _disabled = (configItem.disabled === false ? false : (configItem.disabled || this.disabled))
-     console.log(_disabled, '_disabled------');
-     
+     const _this = this
      const _data =this.data
-     const inputAttrs = {
-      //  value: _data[configItem.field],
-       disabled: _disabled
-     }
+
     //  const inputEvent = {
     //    click: this.ceshi
     //  }
     // class控制样式
     const className = configItem.className ? {[configItem.className]: true} : ''
     const waiting = {
-          input: (
-              <el-input
-                v-model={_data[configItem.field]}
-                // vModel_trim={_data[configItem.field]} // 去空格，有bug
+          input: 
+          // (
+          //     <el-input
+          //       v-model={_data[configItem.field]}
+          //       // vModel_trim={_data[configItem.field]} // 去空格，有bug
 
-                // value={_data[configItem.field]}
-                // disabled={_disabled}
-                {...{ attrs: inputAttrs }}
-                on-input={val => _data[configItem.field] = val.trim()}
-                // style={{background: 'red',display: none}}
-                class={className}
-                clearable
-                />
-          ),
-          select: (
-              <searchSelect 
-                 insertValue={_data[configItem.field]} 
-                 {...{ on: { 'update:insertValue': (val) => { _data[configItem.field] = val; } } } } 
-                 disabled={_disabled}
-                 class={className}
-                 configure={configItem.config} isNumber={true}
-                 />
-          ),
-          date: (
-              <deteSelector
-                title="日期"
-                // timeDefault={_this.data[configItem.field.timeDefault]}
-                timeDefault={_data[configItem.field.timeDefault]}
-                start={_data[configItem.field.start]}
-                end={_data[configItem.field.end]}
-                disabled={_disabled}
-                class={className}
-                {...{ on: { 'update:start': (val) => { _data[configItem.field.start] = val; }, 'update:end': (val) => { _data[configItem.field.end] = val; } } } }
-              />
-          )
+          //       // value={_data[configItem.field]}
+          //       // disabled={_disabled}
+          //       {...{ attrs: inputAttrs }}
+          //       on-input={val => {_data[configItem.field] = val.trim(); _this.handleInput(configItem.receiveFn) }}
+          //       // style={{background: 'red',display: none}}
+          //       // {...{ on: {input: val => {_data[configItem.field] = val.trim()}} }}
+          //       class={className}
+          //       clearable
+          //       />
+          // )
+          this.generateInput({configItem, _disabled, className, _this})
+          ,
+          select: 
+          // (
+          //     <searchSelect 
+          //        insertValue={_data[configItem.field]} 
+          //        {...{ on: { 'update:insertValue': (val) => { _data[configItem.field] = val; } } } } 
+          //        disabled={_disabled}
+          //        class={className}
+          //        configure={configItem.config} isNumber={true}
+          //        />
+          // )
+          this.generateSelect({configItem, _disabled, className, _this})
+          ,
+          date: 
+          // (
+          //     <deteSelector
+          //       title="日期"
+          //       // timeDefault={_this.data[configItem.field.timeDefault]}
+          //       timeDefault={_data[configItem.field.timeDefault]}
+          //       start={_data[configItem.field.start]}
+          //       end={_data[configItem.field.end]}
+          //       disabled={_disabled}
+          //       class={className}
+          //       {...{ on: { 'update:start': (val) => { _data[configItem.field.start] = val; }, 'update:end': (val) => { _data[configItem.field.end] = val; } } } }
+          //     />
+          // )
+          this.generateDate({configItem, _disabled, className, _this})
           // ["2019-10-1", "2019-10-1"]
       // timeDefault="timeDefault"
       // start.sync="search.start"
@@ -297,13 +303,107 @@ export default {
       //   style="width: 100%;"
       // ></el-date-picker>
         }
-        const isNone = configItem.isNone ? 'none' : ''
-        const itemProp = 'rule' in configItem ? ( (typeof configItem.field === 'string') ? configItem.field : configItem.field.timeDefault) : ''
+        const isNone = configItem.isNone ? 'none' : '' //显示控制
+        const itemProp = 'rule' in configItem ? ( (typeof configItem.field === 'string') ? configItem.field : '') : ''
         return (
               <el-form-item label={configItem.label} prop={itemProp} class={{none: isNone}} >
                     {waiting[configItem.type]}
               </el-form-item>
             )
+    },
+    /* 测试外传函数 */
+    handleOutFn(receiveFn) {
+      // debugger
+      // this.$emit('input')
+      receiveFn && receiveFn()
+    },
+    /* 生成输入框 */
+    generateInput({configItem, _disabled, className, _this}) {
+      const inputAttrs = {
+       disabled: _disabled,
+       class: className,
+       clearable: true
+      }
+      // 根据配置来加载事件
+      const option = { on: {input: val => {_this.data[configItem.field] = val.trim(); _this.handleOutFn(configItem.receiveFn)}} }
+      const inputEvents = configItem.receiveFn ? option : {}
+      
+     return (
+            <el-input
+              v-model={_this.data[configItem.field]}
+              {...{ attrs: inputAttrs }}
+              {...inputEvents}
+              class={className}
+              />
+          )
+    },
+    /* 生成下拉列表 */
+    generateSelect({configItem, _disabled, className, _this}) {
+      const selectAttrs = {
+        disabled: _disabled,
+        class: className,
+        insertValue:_this.data[configItem.field],
+        configure: configItem.config,
+        isNumber: true
+      //  clearable: true
+      }
+      // 根据配置来加载事件
+      const option = { on: { 'update:insertValue': (val) => { _this.data[configItem.field] = val; _this.handleOutFn(configItem.receiveFn) } } }
+      const _default = { on: { 'update:insertValue': (val) => { _this.data[configItem.field] = val } } }
+      const selectEvents = configItem.receiveFn ? option : _default
+     return (
+            <searchSelect 
+              // insertValue={_this.data[configItem.field]}
+              {...selectEvents } 
+              {...{ attrs: selectAttrs }}
+              />
+            )
+    },
+    /* 生成时间器 */
+    generateDate({configItem, _disabled, className, _this}) {
+      // const dateAttrs = {
+      //   disabled: _disabled,
+      //   class: className,
+      //   timeDefault: _this.data[configItem.field.timeDefault],
+      //   start: _this.data[configItem.field.start],
+      //   end: _this.data[configItem.field.end],
+      // //  clearable: true
+      // }
+       // const option = { on: { 'update:start': (val) => { _this.data[configItem.field.start] = val; }, 'update:end': (val) => { _this.data[configItem.field.end] = val; } } }
+      // const _default = { on: { 'update:start': (val) => { _this.data[configItem.field.start] = val; }, 'update:end': (val) => { _this.data[configItem.field.end] = val; } } }
+      // const dateEvents = configItem.receiveFn ? option : _default
+      // const dateEvents = { on: { 'update:start': (val) => { _this.data[configItem.field.start] = val; }, 'update:end': (val) => { _this.data[configItem.field.end] = val; } } }
+     return 
+        (
+          <deteSelector
+            timeDefault={_this.data[configItem.field.timeDefault]}
+            start={_this.data[configItem.field.start]}
+            end={_this.data[configItem.field.end]}
+            disabled={_disabled}
+            class={className}
+            // {...{ attrs: dateAttrs }}
+            // {...dateEvents }
+            {...{ on: { 'update:start': (val) => { _this.data[configItem.field.start] = val; }, 'update:end': (val) => { _this.data[configItem.field.end] = val; } } } }
+          />
+        )
+    },
+    /* 生成开关 */
+    generateSwitch(_data, configItem,inputAttrs, _disabled, className, _this) {
+     return (
+              <el-input
+                v-model={_data[configItem.field]}
+                // vModel_trim={_data[configItem.field]} // 去空格，有bug
+
+                // value={_data[configItem.field]}
+                // disabled={_disabled}
+                {...{ attrs: inputAttrs }}
+                // on-input={val => {_data[configItem.field] = val.trim(); _this.handleInput(configItem.receiveFn) }}
+                // style={{background: 'red',display: none}}
+                {...{ on: {input: val => {_data[configItem.field] = val.trim(); _this.handleOutFn(configItem.receiveFn)}} }}
+                class={className}
+                clearable
+                />
+          )
     },
   /*     submitForm() {
       // 验证username不为空且长度在2-10之间

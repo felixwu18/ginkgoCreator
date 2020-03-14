@@ -41,19 +41,16 @@ export default {
           {type: 'input', field: 'name1', label: '活动名称2:',disabled: true, isNone: false },
           // {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: this.testFn, warning: '测试'}], disabled: false},
           {type: 'input', field: 'name2-2', label: '活动名称2-2:', rule: ['required', {isInfluence: false, warning: '测试2-2'}]},
-          {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}]},
+          {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}], receiveFn: this.handleFn},
           // {type: 'date', field: 'date', label: '日期:'},
-          {type: 'date', field: 'timeDefault', label: '日期:', rule: ['require']},
-          {type: 'select',config:configue_area, field: 'region', label: '活动区域'}
+          {type: 'date', field: {start: 'start', end: 'end',timeDefault: 'timeDefault'}, label: '日期:', rule: ['required'], receiveFn: this.handleFn},
+          {type: 'select',config:configue_area, field: 'region', label: '活动区域', receiveFn: this.handleFn}
         ],
       }
   },
   created() {
   },
   computed: {
-    seachName() {
-      return this.detail.name
-    },
   },
   watch: {
     'detail.name': function(val) {
@@ -67,10 +64,14 @@ export default {
          console.log('ceshi')
         //  this.toList()
         this.configs[1].className = ''
+        this.detail.timeDefault = ["2019-10-1", "2019-10-1"]
      },
      toList() {
         this.active.detailActive = false           
         this.active.listActive = true           
+     },
+     handleFn() {
+       console.log(this.detail,'this.search')
      },
     submitForm(formName) {
       // this.$refs[formName].$refs.Form.validate(valid => {
