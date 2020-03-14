@@ -54,6 +54,7 @@ export default {
   },
   watch: {
     timeDefault(newValue, oldValue) {
+      debugger
       this.time = newValue;
       // this.time = this.timeDefault
     }

@@ -238,14 +238,23 @@ export default {
     initData(configItem) {
      var _disabled = (configItem.disabled === false ? false : (configItem.disabled || this.disabled))
      const _data =this.data
-     const waiting = {
+     const inputAttrs = {
+       value: _data[configItem.field],
+       disabled: _disabled
+     }
+     const inputEvent = {
+       click: this.ceshi
+     }
+    const waiting = {
           input: (
               <el-input
                 // v-model={_data[configItem.field]}
                 // vModel_trim={_data[configItem.field]} // 去空格，有bug
-                value={_data[configItem.field]}
+                // value={_data[configItem.field]}
+                // disabled={_disabled}
+                {...{ attrs: inputAttrs }}
                 on-input={val => _data[configItem.field] = val.trim()}
-                disabled={_disabled}
+                {...{on: inputEvent}}
                 clearable
                 />
           ),
@@ -280,21 +289,12 @@ export default {
       //   style="width: 100%;"
       // ></el-date-picker>
         }
-        var ele 
-        if('rule' in configItem) {
-          ele = (
-                  <el-form-item label={configItem.label}  prop={(typeof configItem.field === 'string') ? configItem.field : configItem.field.timeDefault} >
-                        {waiting[configItem.type]}
-                  </el-form-item>
+        const itemProp = 'rule' in configItem ? ( (typeof configItem.field === 'string') ? configItem.field : configItem.field.timeDefault) : ''
+        return (
+              <el-form-item label={configItem.label} prop={itemProp} >
+                    {waiting[configItem.type]}
+              </el-form-item>
             )
-        }else {
-          ele = (
-                  <el-form-item label={configItem.label} >
-                        {waiting[configItem.type]}
-                  </el-form-item>
-            )
-        }
-        return ele
     },
   /*     submitForm() {
       // 验证username不为空且长度在2-10之间
