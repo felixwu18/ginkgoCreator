@@ -8,6 +8,7 @@
     ref="Form"
     label-width="100px"
     class="demo-ruleForm"
+    :inline="inline"
     v-on="$listeners"
     v-bind="$attrs"
   >
@@ -278,20 +279,22 @@ export default {
           this.generateSelect({configItem, _disabled, className, _this})
           ,
           date: 
-          // (
-          //     <deteSelector
-          //       title="日期"
-          //       // timeDefault={_this.data[configItem.field.timeDefault]}
-          //       timeDefault={_data[configItem.field.timeDefault]}
-          //       start={_data[configItem.field.start]}
-          //       end={_data[configItem.field.end]}
-          //       disabled={_disabled}
-          //       class={className}
-          //       {...{ on: { 'update:start': (val) => { _data[configItem.field.start] = val; }, 'update:end': (val) => { _data[configItem.field.end] = val; } } } }
-          //     />
-          // )
-          this.generateDate({configItem, _disabled, className, _this})
-          // ["2019-10-1", "2019-10-1"]
+          (
+              <deteSelector
+                title="日期"
+                // timeDefault={_this.data[configItem.field.timeDefault]}
+                timeDefault={_data[configItem.field.timeDefault]}
+                start={_data[configItem.field.start]}
+                end={_data[configItem.field.end]}
+                disabled={_disabled}
+                class={className}
+                {...{ on: { 'update:start': (val) => { _data[configItem.field.start] = val; }, 'update:end': (val) => { _data[configItem.field.end] = val; } } } }
+              />
+            // this.generateDate({configItem, _disabled, className, _this})
+          ),
+          switch: (
+            this.generateSwitch({configItem, _disabled, className, _this})
+          )
       // timeDefault="timeDefault"
       // start.sync="search.start"
       // end.sync="search.end"
@@ -308,6 +311,8 @@ export default {
         return (
               <el-form-item label={configItem.label} prop={itemProp} class={{none: isNone}} >
                     {waiting[configItem.type]}
+                    <label v-show={configItem.sufText} class="sufText">{ configItem.sufText || '' }</label>
+                    <slot name={configItem.field} />
               </el-form-item>
             )
     },
@@ -326,7 +331,8 @@ export default {
       }
       // 根据配置来加载事件
       const option = { on: {input: val => {_this.data[configItem.field] = val.trim(); _this.handleOutFn(configItem.receiveFn)}} }
-      const inputEvents = configItem.receiveFn ? option : {}
+      const _default = { on: {input: val => {_this.data[configItem.field] = val.trim() }} }
+      const inputEvents = configItem.receiveFn ? option : _default
       
      return (
             <el-input
@@ -357,7 +363,7 @@ export default {
               {...selectEvents } 
               {...{ attrs: selectAttrs }}
               />
-            )
+          )
     },
     /* 生成时间器 */
     generateDate({configItem, _disabled, className, _this}) {
@@ -388,21 +394,21 @@ export default {
         )
     },
     /* 生成开关 */
-    generateSwitch(_data, configItem,inputAttrs, _disabled, className, _this) {
+    generateSwitch({configItem, _disabled, className, _this}) {
+      const switchAttrs = {
+        disabled: _disabled,
+        class: className,
+        activeColor: '#13ce66'
+      }
+      // 根据配置来加载事件
+      // const option = { on: { 'update:insertValue': (val) => { _this.data[configItem.field] = val; _this.handleOutFn(configItem.receiveFn) } } }
+      // const _default = { on: { 'update:insertValue': (val) => { _this.data[configItem.field] = val } } }
+      // const selectEvents = configItem.receiveFn ? option : _default
      return (
-              <el-input
-                v-model={_data[configItem.field]}
-                // vModel_trim={_data[configItem.field]} // 去空格，有bug
-
-                // value={_data[configItem.field]}
-                // disabled={_disabled}
-                {...{ attrs: inputAttrs }}
-                // on-input={val => {_data[configItem.field] = val.trim(); _this.handleInput(configItem.receiveFn) }}
-                // style={{background: 'red',display: none}}
-                {...{ on: {input: val => {_data[configItem.field] = val.trim(); _this.handleOutFn(configItem.receiveFn)}} }}
-                class={className}
-                clearable
-                />
+            <el-switch
+              v-model={_this.data[configItem.field]}
+              {...{ attrs: switchAttrs }}
+            />
           )
     },
   /*     submitForm() {
@@ -498,8 +504,27 @@ export default {
     }
 };
 </script>
-
 <style>
+ /* role[switch] {
+    display:inline-block;
+  } */
+</style>
+<style lang="scss" soped>
+// .demo-ruleForm {
+//   /deep/ .el-input {
+//     width: 50%;
+//   }
+//   /deep/  .el-switch {
+//     display:inline-block !important;
+//   }
+// }
+// .sufText {
+//     // position: absolute;
+//     width: 100px;
+//     margin-left: 16px;
+//     top: 2px;
+//     // left: 25px;
+//   }
 .red {
   background: red
 }

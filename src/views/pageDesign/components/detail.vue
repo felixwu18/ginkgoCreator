@@ -2,7 +2,9 @@
   <div class="about com_border">
     <h2>详情页</h2>
     <el-button @click="ceshi">返回列表</el-button>
-    <rule-form2 ref="Form" :configs="configs" :data="detail" :fn="submitForm" />
+    <rule-form2 ref="Form" :configs="configs" :data="detail" :fn="submitForm" >
+      <span slot="name">66666</span>
+    </rule-form2>
   </div>
 </template>
 
@@ -38,13 +40,14 @@ export default {
           },
         configs: [
           {type: 'input', field: 'name', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}], disabled: false},
-          {type: 'input', field: 'name1', label: '活动名称2:',disabled: true, isNone: false },
+          {type: 'input', field: 'name1', label: '活动名称2:',disabled: true, isNone: false},
           // {type: 'input', field: 'name2', label: '活动名称2:', rule: ['required', {isInfluence: this.testFn, warning: '测试'}], disabled: false},
           {type: 'input', field: 'name2-2', label: '活动名称2-2:', rule: ['required', {isInfluence: false, warning: '测试2-2'}]},
           {type: 'input', field: 'name3', label: '活动名称3:', rule: ['required', {checkName: 'checkDecimal2'}], receiveFn: this.handleFn},
           // {type: 'date', field: 'date', label: '日期:'},
           {type: 'date', field: {start: 'start', end: 'end',timeDefault: 'timeDefault'}, label: '日期:', rule: ['required'], receiveFn: this.handleFn},
-          {type: 'select',config:configue_area, field: 'region', label: '活动区域', receiveFn: this.handleFn}
+          {type: 'select',config:configue_area, field: 'region', label: '活动区域', receiveFn: this.handleFn},
+          {type: 'switch', field: 'close', label: '开关测试'}
         ],
       }
   },
