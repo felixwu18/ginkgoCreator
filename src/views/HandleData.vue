@@ -1,7 +1,7 @@
 <template lang="html">
   <div>
     <h2>数据处理</h2>
-    <el-tabs class="margin" v-model="activeName" @tab-click="handleClick">
+    <el-tabs class="margin" v-model="activeName" @tab-click="handleClick" :before-leave="beforeLeave">
       <el-tab-pane label="Ramda" name="first">
         <h2 @click="test">Ramda</h2>
         <p>R.add(2, 3) => {{ R.add(2, 3) }}</p>
@@ -46,6 +46,20 @@ export default {
   computed: {},
   methods: {
     handleClick() {
+      // debugger
+    },
+    // 方法二使用了throw new Error()阻断js
+    beforeLeave(item) {
+      return this.$confirm('离开将不保存本页修改', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      })
+      .then(() => {
+      })
+      .catch(() => {
+        throw new Error('取消成功！')
+      })
     },
     handleOuterJs() {
       outJs.call(this, this.test)
