@@ -339,7 +339,6 @@ export default {
               v-model={_this.data[configItem.field]}
               {...{ attrs: inputAttrs }}
               {...inputEvents}
-              class={className}
               />
           )
     },
