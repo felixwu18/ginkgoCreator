@@ -13,6 +13,7 @@
     v-bind="$attrs"
   >
     <demo />
+    <slot />
     <!-- <el-form-item label="活动名称" prop="name" ref="nameItem">
       <el-input v-model="ruleForm.name" clearable></el-input>
     </el-form-item> -->
@@ -311,9 +312,10 @@ export default {
         return (
               <el-form-item label={configItem.label} prop={itemProp} class={{none: isNone}} >
                     {waiting[configItem.type]}
-                    <label v-show={configItem.sufText} class="sufText">{ configItem.sufText || '' }</label>
-                    <slot name={configItem.field} />
+                    {_this.sufText(configItem)}
+                    <slot />
               </el-form-item>
+                    // <slot name={configItem.field} />
             )
     },
     /* 测试外传函数 */
@@ -321,6 +323,9 @@ export default {
       // debugger
       // this.$emit('input')
       receiveFn && receiveFn()
+    },
+    sufText(configItem) {
+      return configItem.sufText ? (<label class="sufText">{ configItem.sufText }</label>) : ''
     },
     /* 生成输入框 */
     generateInput({configItem, _disabled, className, _this}) {
