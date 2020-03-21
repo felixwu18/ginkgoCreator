@@ -2,7 +2,8 @@
   <div class="about com_border">
     <h2>详情页</h2>
     <el-button @click="ceshi">返回列表</el-button>
-    <rule-form2 ref="Form" :configs="configs" :data="detail" :fn="submitForm" >
+    <el-button @click="ceshi2">同环境多个同一组件切换状态</el-button>
+    <rule-form2  v-if="isShow_1" ref="Form" :configs="configs" :data="detail" :fn="submitForm" >
       <span slot="name">6666611111</span>
       <el-dialog title="收货地址" :visible.sync="dialogFormVisible">
         <el-form :model="detail">
@@ -22,6 +23,7 @@
         </div>
       </el-dialog>
     </rule-form2>
+    <rule-form2 v-if="isShow_2" ref="Form" :configs="configs_2" :data="detail" :fn="submitForm" />
   </div>
 </template>
 
@@ -45,11 +47,15 @@ export default {
   data() {
     var classNma = 'none'
       return {
+        isShow_1: true,
+        isShow_2: false,
         form: {},
         dialogFormVisible: false,
         formLabelWidth: '120px',
         classNma,
         detail: {          
+          name666: '',
+          name999: '',
           name: '',
           name2: '',
           date: '',
@@ -69,6 +75,10 @@ export default {
           {type: 'select',config:configue_area, field: 'region', label: '活动区域', receiveFn: this.handleFn},
           {type: 'switch', field: 'close', label: '开关测试'}
         ],
+        configs_2: [
+          {type: 'input', field: 'name666', label: '活动名称:', rule: ['required', {checkName: 'checkDecimal'}], disabled: false},
+          {type: 'input', field: 'name999', label: '活动名称2:',disabled: true, isNone: false},
+        ]
       }
   },
   created() {
@@ -89,6 +99,15 @@ export default {
         this.dialogFormVisible = true
         this.configs[1].className = ''
         this.detail.timeDefault = ["2019-10-1", "2019-10-1"]
+     },
+     ceshi2() {
+       if (this.isShow_1) {
+         this.isShow_1 = false
+         this.isShow_2 = true
+       } else {
+         this.isShow_1 = true
+         this.isShow_2 = false
+       }
      },
      toList() {
         this.active.detailActive = false           

@@ -23,7 +23,14 @@ export default {
           meta: {
             title: '页面设计',
           }
-        
+        },
+        {
+          path: "/home/communication",
+          name: "communication",
+          component: () => import(/** webpackChunkname: 'index*/ "@/views/componentsCommunication/index"),
+          meta: {
+            title: '组件通信',
+          }
         }
       ],
       meta: {

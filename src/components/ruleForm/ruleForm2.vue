@@ -1,6 +1,9 @@
 <template>
-<!-- <div>
-  <el-button type="primary" @click="submitForm('Form')">立即创建inner</el-button> -->
+<div
+  v-on="$listeners"
+  v-bind="$attrs"
+>
+  <el-button type="primary" @click="submit('Form')">立即创建inner</el-button>
     <!-- <button @click="ceshi" @change="ceshi">ceshi</button> -->
   <el-form
     :model="data"
@@ -9,8 +12,6 @@
     label-width="100px"
     class="demo-ruleForm"
     :inline="inline"
-    v-on="$listeners"
-    v-bind="$attrs"
   >
     <demo />
     <slot />
@@ -37,7 +38,7 @@
       ></el-input>
     </el-form-item> -->
   </el-form>
-<!-- </div> -->
+</div>
 </template>
 
 <script>
@@ -48,10 +49,10 @@ import check from"@/utils/validate"
 const demo = {
   name: 'demo',
   functional: true,
-  props: {
-      // flag: String,
-      // ruleForm: Object
-  },
+  // props: {
+  //     // flag: String,
+  //     // ruleForm: Object
+  // },
   render: (h, ctx) => {
     console.log(ctx, 1111)
     const parent = ctx.parent
@@ -204,6 +205,9 @@ export default {
     }
   },
   methods: {
+    // validate() {
+    //  return this.$refs.Form.validate
+    // },
     copyPropVal(fromObj, toObj) {
       Object.keys(toObj).forEach(ele => {
         if (ele in fromObj && !(ele in toObj) && fromObj[ele]) {
@@ -220,16 +224,19 @@ export default {
           callback()
       }
     },
-      submitForm(formName) {
-        this.fn(this.$refs[formName])
-      // this.$refs[formName].validate(valid => {
-      //   if (valid) {
-      //     alert("submit!");
-      //   } else {
-      //     console.log("error submit!!");
-      //     return false;
-      //   }
-      // });
+      submit(formName) {
+        return new Promise((resolve, reject) => {
+          this.$refs['Form'].validate(valid => {
+            if (valid) {
+              alert("submit!");
+              resolve()
+            } else {
+              console.log("error submit!!");
+              reject()
+              return false;
+            }
+          });
+        })
     },
     ceshi(v) {
       // this.ruleForm
@@ -313,9 +320,7 @@ export default {
               <el-form-item label={configItem.label} prop={itemProp} class={{none: isNone}} >
                     {waiting[configItem.type]}
                     {_this.sufText(configItem)}
-                    <slot />
               </el-form-item>
-                    // <slot name={configItem.field} />
             )
     },
     /* 测试外传函数 */
@@ -415,7 +420,7 @@ export default {
             />
           )
     },
-  /*     submitForm() {
+  /*     submit() {
       // 验证username不为空且长度在2-10之间
       let checkUsername = this.$validate({
         label: "username",
@@ -504,7 +509,6 @@ export default {
       //   console.log(this.father);
       // }, 1000)
       //  = this.$refs
-      // debugger
     }
 };
 </script>
