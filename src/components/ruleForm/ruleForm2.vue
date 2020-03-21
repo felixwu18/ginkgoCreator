@@ -229,10 +229,10 @@ export default {
           this.$refs['Form'].validate(valid => {
             if (valid) {
               alert("submit!");
-              resolve()
+              resolve(valid)
             } else {
               console.log("error submit!!");
-              reject()
+              reject(valid)
               return false;
             }
           });
