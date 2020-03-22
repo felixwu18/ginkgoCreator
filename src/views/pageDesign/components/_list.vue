@@ -41,6 +41,70 @@
 //   { prop: "address", label: "地址" },
 //   { prop: "zip", label: "邮编" }
 // ];
+
+var memory = [
+    {
+      airQuality: 1,
+      level: 1,
+      state1: false,
+      state2: true,
+      date: "2016-05-02",
+      hour: "8小时",
+      minite: "90分钟",
+      name: "feichang",
+      province: "四川",
+      city: "成都",
+      address: "春熙路",
+      zip: 999
+    },
+    {
+      airQuality: 1,
+      level: 1,
+      state1: false,
+      state2: true,
+      date: "2016-05-02",
+      hour: "8小时",
+      minite: "90分钟",
+      name: "feichang",
+      province: "四川",
+      city: "成都",
+      address: "春熙路",
+      zip: 999
+    },
+    {
+      airQuality: 1,
+      level: 1,
+      state1: false,
+      state2: true,
+      date: "2016-05-02",
+      hour: "8小时",
+      minite: "90分钟",
+      name: "feichang",
+      province: "四川",
+      city: "成都",
+      address: "春熙路",
+      zip: 999
+    },
+    {
+      airQuality: 1,
+      level: 1,
+      state1: false,
+      state2: true,
+      date: "2016-05-02",
+      hour: "8小时",
+      minite: "90分钟",
+      name: "feichang",
+      province: "四川",
+      city: "成都",
+      address: "春熙路",
+      zip: 999
+    }
+  ]
+var flag = 0
+ for(var i=0; i< 100; i++) {
+   memory = memory.concat(memory.slice(flag, flag + 2))
+ }
+
 const tableData = [
   {
     airQuality: 1,
@@ -109,11 +173,16 @@ export default {
     }            
   },
   methods: {
-     ceshi(){
-         console.log('ceshi')
-         console.log(this.$slots.form[0].data.ref)
-         console.log(this.formHeadRef)
-        
+     ceshi() {
+       if(flag < 3) {
+         var temp = []
+        //  for(var i=0; i< 100; i++) {
+        //    temp = temp.concat(memory.slice(flag, flag + 2))
+        //  }
+        //  this.tableData.push(...temp)
+         this.tableData.push(...memory)
+       }
+       flag++
      },
      eventTrigger(row, eventName){
         console.log('row--eventName')
@@ -122,6 +191,7 @@ export default {
         this.toMutate()             
      },
      handleDetail(row) {
+
         this.toDetail()            
      },
      toMutate() {

@@ -91,7 +91,7 @@ export default {
     //  this.ceshi()
     // })
   },
-  mounted(){
+  mounted() {
     // 需要异步依赖处理成同步 依赖触发再调回调 即触发延迟处理
     // setTimeout(_ => {
     //     var aaa = 1
