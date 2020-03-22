@@ -10,6 +10,8 @@
 import List from "./components/list";
 import Mutate from "./components/mutate";
 import Detail from "./components/detail";
+
+// import { Event } from "@/utils/listen";
 export default {
   name: "controlCenter",
   components: {

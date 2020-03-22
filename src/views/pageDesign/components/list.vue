@@ -20,6 +20,8 @@ import formHead from "./formHead";
 import _mixinsCommon from "@/views/mixins/common"
 console.log(_mixinsCommon, '_mixinsCommon');
 
+
+
 // const tableHead = [
 //   { prop: "airQuality", label: "空气质量" },
 //   { prop: "level", label: "等级" },

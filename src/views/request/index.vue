@@ -2,6 +2,7 @@
   <div>
     <h2>fetch请求</h2>
     <el-button @click="ceshi">点击ceshi</el-button>
+    
   </div>
 </template>
 

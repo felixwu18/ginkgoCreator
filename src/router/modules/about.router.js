@@ -28,7 +28,7 @@ export default {
       name: "request",
       component: () => import("@/views/request/index"),
       meta: {
-        title: '数据请求',
+        title: '数据异步及发布订阅',
       }
     }
   ],

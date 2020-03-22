@@ -29,6 +29,11 @@
 
 <script>
 import ruleForm2 from '@/components/ruleForm/ruleForm2'
+
+import { Event } from "@/utils/listen";
+
+
+
 // 配置转换
 const configue_area = [
   { key: 1, value: "区域一" },
@@ -82,6 +87,16 @@ export default {
       }
   },
   created() {
+    // Event.listen('list-plus', (aaa) => {
+    //  this.ceshi()
+    // })
+  },
+  mounted(){
+    // 需要异步依赖处理成同步 依赖触发再调回调 即触发延迟处理
+    // setTimeout(_ => {
+    //     var aaa = 1
+    //    Event.trigger('list-plus', aaa)
+    // }, 1000)
   },
   computed: {
   },
@@ -95,6 +110,7 @@ export default {
   methods: {
      ceshi() {
          console.log('ceshi')
+
         //  this.toList()
         this.dialogFormVisible = true
         this.configs[1].className = ''

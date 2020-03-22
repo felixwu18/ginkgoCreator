@@ -62,7 +62,7 @@ export default {
         //  debugger
         this.$refs.Form2.submit()
         .then(val => {
-            debugger
+            // debugger
         })
         .catch(val => {
         })
