@@ -1,6 +1,6 @@
 <template>
   <div class="about com_border">
-    <button @click="ceshi">inner ceshi</button>
+    <button @click="tesFn">inner ceshi</button>
     <!-- <formHead /> -->
     <slot name="form" />
     <dynamicTable
@@ -101,9 +101,9 @@ var memory = [
     }
   ]
 var flag = 0
- for(var i=0; i< 100; i++) {
-   memory = memory.concat(memory.slice(flag, flag + 2))
- }
+//  for(var i=0; i< 100; i++) {
+//    memory = memory.concat(memory.slice(flag, flag + 2))
+//  }
 
 const tableData = [
   {
@@ -150,6 +150,16 @@ const tableData = [
   }
 ];
 
+   function countLimit(count = 1, fn) {
+       return function() {
+         //  fn()
+        // debugger
+        // this.ceshi()
+        count > 0 && console.log(count)
+        count--
+       }
+     }
+
 export default {
   props: {
       active: { type: Object, default: _ => {} },            
@@ -159,10 +169,13 @@ export default {
 //   components: {
 //     formHead
 //   },
+  created() {
+    // this.tesFn = countLimit(2, this.ceshi)
+  },
   data() {
     return {
     //   tableHead,
-      
+      tesFn: countLimit(3, this.ceshi),
       tableData,
       btnConfigure:{
         prop: "",
@@ -174,15 +187,16 @@ export default {
   },
   methods: {
      ceshi() {
-       if(flag < 3) {
+      //  if(flag < 3) {
          var temp = []
-        //  for(var i=0; i< 100; i++) {
-        //    temp = temp.concat(memory.slice(flag, flag + 2))
-        //  }
-        //  this.tableData.push(...temp)
-         this.tableData.push(...memory)
-       }
+         for(var i=0; i< 10; i++) {
+           temp = temp.concat(memory.slice(flag, flag + 2))
+         }
+         this.tableData.push(...temp)
+        //  this.tableData.push(...memory)
+      //  }
        flag++
+     }
      },
      eventTrigger(row, eventName){
         console.log('row--eventName')
@@ -202,7 +216,6 @@ export default {
         this.active.listActive = false           
         this.active.detailActive = true           
      }
-  }
 };
 </script>
 
