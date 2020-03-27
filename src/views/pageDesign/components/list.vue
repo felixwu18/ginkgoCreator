@@ -2,14 +2,14 @@
   <div class="about com_border">
     <h2>列表页</h2>
       <!-- <button @click="ceshi">ceshi</button> -->
-      <List :formHeadRef="$refs" :formHead="tableHead" v-if="active.listActive" :active="active" :father="this">  
+      <List :list-api="listApi" :formHeadRef="$refs" :formHead="tableHead" v-if="active.listActive" :active="active" :father="this">  
         <formHead ref="formHead" :search="search" slot="form" />
       </List>
       <transition name='move'>
           <h2>666</h2>
       </transition>
       <!-- minxin  -->
-      <el-button @click="testMixin">点击 ceshi mixin</el-button>
+      <el-button @click="testMixin">点击 ceshi mixin{{ttt}}</el-button>
       <mixin-test-button />
   </div>
 </template>
@@ -61,11 +61,30 @@ export default {
   },
   data() {
     return {
+      listApi: {
+        request: {},  // 参数对象需要进api对象取，比直接写data()里多一层
+        fetchList: fetch("http://127.0.0.1:6800/33/"),
+        back: 'res' // 主要返回需要动态执行
+      },
       // tableHead,
       search: { // 通过slot标签通信，传入标签
-        name: ''
+        name: '999'
       }
-    }            
+    }           
+  },
+  computed: {
+    ttt() {
+      return this.search.name
+    }
+  },
+  watch: {
+    // search: {
+    //   handler(newVal) {
+    //   // this.fullName = newName + ' ' + this.lastName;
+    //   this.listApi.request = this.search
+    // },
+    //  immediate: true
+    // }
   },
   methods: {
      ceshi() {

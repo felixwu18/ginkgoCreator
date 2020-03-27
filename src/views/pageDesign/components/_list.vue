@@ -12,6 +12,11 @@
       @enterDetail="handleDetail"
       @dynamicEvent="eventTrigger"
     />
+    <h2>请求封装测试</h2>
+    <el-button @click="handleRequest" >点击ceshi</el-button>
+    <div style="color:red; padding-top: 10px">
+      data:{{requestData}}
+    </div>
   </div>
 </template>
 
@@ -157,14 +162,15 @@ const tableData = [
         // this.ceshi()
         count > 0 && console.log(count)
         count--
-       }
-     }
+      }
+   }
 
 export default {
   props: {
       active: { type: Object, default: _ => {} },            
       father: { type: Object, default: _ => {} },
-      formHeadRef: { type: Object, default: _ => {} } 
+      formHeadRef: { type: Object, default: _ => {} },
+      listApi: {type: Object, default: _ => ({})}
   },
 //   components: {
 //     formHead
@@ -174,6 +180,7 @@ export default {
   },
   data() {
     return {
+      requestData: '',
     //   tableHead,
       tesFn: countLimit(3, this.ceshi),
       tableData,
@@ -183,9 +190,28 @@ export default {
           { btnArr: ["修改"] },
         ]
       },
+      res: ''
     }            
   },
   methods: {
+    handleRequest() {
+      // get请求 请求封装
+      var fetchList = this.listApi.fetchList
+      var back = this.listApi.back
+      console.log(this.listApi)
+      debugger
+      fetchList
+        .then(data => data.json())
+        .then(res => {
+          back = eval(back)
+          this.requestData = back
+          // back = (new Function(`return ${back}`))() // eval替代方案
+
+        })
+        .catch(err => {
+          console.warning(err)
+        })
+    },
      ceshi() {
       //  if(flag < 3) {
          var temp = []
@@ -196,7 +222,6 @@ export default {
         //  this.tableData.push(...memory)
       //  }
        flag++
-     }
      },
      eventTrigger(row, eventName){
         console.log('row--eventName')
@@ -205,7 +230,6 @@ export default {
         this.toMutate()             
      },
      handleDetail(row) {
-
         this.toDetail()            
      },
      toMutate() {
@@ -216,10 +240,11 @@ export default {
         this.active.listActive = false           
         this.active.detailActive = true           
      }
+  }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .about {
   color: green;
   font-size: bold;
