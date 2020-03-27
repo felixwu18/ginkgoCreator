@@ -199,7 +199,6 @@ export default {
       var fetchList = this.listApi.fetchList
       var back = this.listApi.back
       console.log(this.listApi)
-      debugger
       fetchList
         .then(data => data.json())
         .then(res => {

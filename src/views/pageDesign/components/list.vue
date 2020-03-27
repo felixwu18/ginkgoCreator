@@ -62,8 +62,10 @@ export default {
   data() {
     return {
       listApi: {
-        request: {},  // 参数对象需要进api对象取，比直接写data()里多一层
-        fetchList: fetch("http://127.0.0.1:6800/33/"),
+        request: {   // 参数对象需要进api对象取，比直接写data()里多一层
+          name: 666
+        },
+        fetchList: fetch("http://127.0.0.1:6800/33/"), 
         back: 'res' // 主要返回需要动态执行
       },
       // tableHead,
