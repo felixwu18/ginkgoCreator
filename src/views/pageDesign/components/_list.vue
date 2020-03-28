@@ -200,15 +200,15 @@ export default {
       var back = this.listApi.back
       console.log(this.listApi)
       fetchList
-        .then(data => data.json())
+        .then(data => data.clone().json())
         .then(res => {
           /* 1 */
-          // back = eval(back)
+          back = eval(back)
           /* 2 */
           // window['res'] = res
           // back = (new Function(`return ${back}`))() // eval替代方案, new Functon 只支持全局作用域，所以得通过window中转
           /* 3 */
-          back = this.strToVariable('res',res, back)
+          // back = this.strToVariable('res',res, back)
           this.requestData = back
         })
         .catch(err => {
