@@ -204,7 +204,7 @@ export default {
         .then(res => {
           // back = eval(back)
           window['res'] = res
-          back = (new Function(`return ${back}`))() // eval替代方案
+          back = (new Function(`return ${back}`))() // eval替代方案, new Functon 只支持全局作用域，所以得通过window中转
           this.requestData = back
         })
         .catch(err => {
