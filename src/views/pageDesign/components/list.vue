@@ -79,7 +79,7 @@ export default {
       return this.search.name
     }
   },
-  watch: {
+  // watch: {
     // search: {
     //   handler(newVal) {
     //   // this.fullName = newName + ' ' + this.lastName;
@@ -87,7 +87,7 @@ export default {
     // },
     //  immediate: true
     // }
-  },
+  // },
   methods: {
      ceshi() {
          console.log('ceshi')

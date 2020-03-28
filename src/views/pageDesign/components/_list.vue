@@ -202,14 +202,25 @@ export default {
       fetchList
         .then(data => data.json())
         .then(res => {
+          /* 1 */
           // back = eval(back)
-          window['res'] = res
-          back = (new Function(`return ${back}`))() // eval替代方案, new Functon 只支持全局作用域，所以得通过window中转
+          /* 2 */
+          // window['res'] = res
+          // back = (new Function(`return ${back}`))() // eval替代方案, new Functon 只支持全局作用域，所以得通过window中转
+          /* 3 */
+          back = this.strToVariable('res',res, back)
           this.requestData = back
         })
         .catch(err => {
-          console.warning(err)
+          console.log(err)
         })
+    },
+    /* 字符串to变量 */
+    strToVariable(str, res, back) {
+      // str 为调用当前作用域的变量字符串(接受数据的window属性), res 真正接受数据的变量, back 外部取数据的数据结构字符串
+      window[str] = res
+      // eval替代方案, new Functon 只支持全局作用域，所以得通过window中转
+      return (new Function(`return ${back}`))()
     },
      ceshi() {
       //  if(flag < 3) {
