@@ -202,10 +202,10 @@ export default {
       fetchList
         .then(data => data.json())
         .then(res => {
-          back = eval(back)
+          // back = eval(back)
+          window['res'] = res
+          back = (new Function(`return ${back}`))() // eval替代方案
           this.requestData = back
-          // back = (new Function(`return ${back}`))() // eval替代方案
-
         })
         .catch(err => {
           console.warning(err)
