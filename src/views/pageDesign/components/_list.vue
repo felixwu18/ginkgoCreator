@@ -12,7 +12,7 @@
       @enterDetail="handleDetail"
       @dynamicEvent="eventTrigger"
     />
-    <h2>请求封装测试</h2>
+    <h2>请求从外导入封装测试</h2>
     <el-button @click="handleRequest" >点击ceshi</el-button>
     <div style="color:red; padding-top: 10px">
       data:{{requestData}}
@@ -219,8 +219,15 @@ export default {
     strToVariable(str, res, back) {
       // str 为调用当前作用域的变量字符串(接受数据的window属性), res 真正接受数据的变量, back 外部取数据的数据结构字符串
       window[str] = res
+      // 异步删除全局临时属性
+      var id = setTimeout(_ =>this.deleteGlobalVal(str, id))
       // eval替代方案, new Functon 只支持全局作用域，所以得通过window中转
       return (new Function(`return ${back}`))()
+    },
+    deleteGlobalVal(str, id) {
+      // window[str] = ''
+      clearTimeout(id) // 清定时器
+      delete window[str] //清全局临时属性
     },
      ceshi() {
       //  if(flag < 3) {
