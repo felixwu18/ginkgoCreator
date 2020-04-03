@@ -595,7 +595,11 @@ export default {
           }
         });
       } else {
-        btnShowArr.push(...this.btnConfigure.btnStates[0].btnArr);
+        /* 容错处理 */
+        var isArray = this.btnConfigure.btnStates instanceof Array
+        if (isArray) {
+          btnShowArr.push(...this.btnConfigure.btnStates[0].btnArr);
+        }
       }
       return btnShowArr;
     }

@@ -216,6 +216,7 @@ export default {
       });
     },
     influence(rule, value, callback, condition) {
+      debugger
       this.isType(condition.isInfluence, "Function") || (condition.isInfluence = () => {})
       if (condition.isInfluence()) {
           // form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据

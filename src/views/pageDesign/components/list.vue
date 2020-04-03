@@ -89,6 +89,9 @@ export default {
     // }
   // },
   methods: {
+    testMixin() {
+      
+    },
      ceshi() {
          console.log('ceshi')
          console.log(this.search)

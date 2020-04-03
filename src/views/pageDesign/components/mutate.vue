@@ -55,6 +55,7 @@ export default {
   },
   methods: {
     testFn() {
+      console.log(this.search, 'search------')
       return this.search.name < this.search.name2
     },
     // initForm() {

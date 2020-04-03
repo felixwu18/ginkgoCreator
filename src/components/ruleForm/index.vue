@@ -211,12 +211,13 @@ export default {
     },
     influence(rule, value, callback, condition) {
       this.isType(condition.isInfluence, "Function") || (condition.isInfluence = () => {})
-      if (condition.isInfluence()) {
-          // form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据
-          return callback(new Error(condition.warning))
-      } else {
-          callback()
-      }
+      condition.isInfluence.call(this)
+      // if (condition.isInfluence()) {
+      //     // form_this.data[rule.field] = '' // 清除输入 form_this 表单this rule.field当前验证字段，data表单数据
+      //     return callback(new Error(condition.warning))
+      // } else {
+      //     callback()
+      // }
     },
       submitForm(formName) {
         this.fn(this.$refs[formName])
