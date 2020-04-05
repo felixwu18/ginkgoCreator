@@ -6,6 +6,8 @@
     <h2>Proxy数据劫持(vue3)</h2>
     <el-button style="float: right" @click="proxyTest">测试proxy</el-button>
     <!-- <el-button style="float: right" @click="noMutate">防止数据修改</el-button> -->
+    <h2>健壮性处理</h2>
+    <yh-button @click="handleAdapter">点击数据适配</yh-button>
 
   </div>
 </template>
@@ -21,6 +23,25 @@ export default {
     }
   },  
   methods: {
+    isType(value, type) {
+     return Object.prototype.toString.call(value).slice(8, -1) === type
+    },
+    handleAdapter(a = {}) {
+      var str = a.b.c
+      this.adapter('a.b.c', 'Object', this)
+    },
+    adapter(str, type, _this) {
+      var strArr = str.split('.')
+      strArr.reduce((collect, cur) => {
+        var index = cur.indexOf('[')
+        if (index !== -1) {
+          var aaa = _this[collect + cur.slice(0, index - 1)]
+          aaa || (aaa = {})
+        }
+        collect += cur; 
+        this.isType(_this[collect], type) ? '' : _this[collect] = {}
+     })
+    },
     proxyTest() {
       // defineProperty的替代者 
       // Proxy代理对象后放回新对象, 读取源对象，不会触发代理对象的get方法， 测试，取源对象和取新对象属性时，对比效果
