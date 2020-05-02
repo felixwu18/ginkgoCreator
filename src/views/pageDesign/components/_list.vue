@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { Event } from "@/utils/listen";
 // import formHead from "./formHead";
 // const tableHead = [
 //   { prop: "airQuality", label: "空气质量" },
@@ -253,7 +254,11 @@ export default {
      },
      toMutate() {
         this.active.listActive = false           
-        this.active.mutateActive = true           
+        this.active.mutateActive = true  
+        // Event.trigger('list-plus', 'data from topFather index')     
+        Event.listen('list-plus', (aaa) => {
+          debugger
+        })
      },
      toDetail() {
         this.active.listActive = false           

@@ -9,6 +9,7 @@
 
 <script>
 import ruleForm from '@/components/ruleForm/index'
+import { Event } from "@/utils/listen";
 
 // 配置转换
 const configue_area = [
@@ -27,6 +28,10 @@ export default {
   created() {
     console.log(this.search, 'create');
     // this.initForm()
+    Event.trigger('list-plus', 'data from topFather index')     
+    // Event.listen('list-plus', (aaa) => {
+    //   debugger
+    // })
   },
   data() {
       console.log(this, '-----thsi')
