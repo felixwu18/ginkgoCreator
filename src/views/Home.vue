@@ -32,8 +32,8 @@
 
       </el-tab-pane>
       <el-tab-pane class="textLeft height" label="iframe" name="six">
-        <iframePage url="http://www.sci99.com/" />
-        <iframePage origin-width="800px" origin-height="900px" width="700px" height="1024px" margin="-320px 0px 0px -10px"  url="http://www.sci99.com/details/monitorall.aspx" />
+        <!-- <iframePage url="http://www.sci99.com/" />
+        <iframePage origin-width="800px" origin-height="900px" width="700px" height="1024px" margin="-320px 0px 0px -10px"  url="http://www.sci99.com/details/monitorall.aspx" /> -->
       </el-tab-pane>
       <el-tab-pane class="textLeft height" label="拖拽库sortable" name="seven">
         <ul id="items">
@@ -41,6 +41,10 @@
           <li class="item-">item 2</li>
           <li class="item-">item 3</li>
         </ul>
+      </el-tab-pane>
+      <el-tab-pane label="表格checkbox交互" name="eight">
+        66
+        <table-checkbox />
       </el-tab-pane>
   </el-tabs>
     <!-- <p>{{msg}}</p> -->
@@ -66,14 +70,14 @@ import positionNav from "@/components/positionNav";
 import tree from "@/components/tree";
 import iframePage from "@/components/iframePage";
 import marquee from "@/components/marquee";
+import tableCheckbox from "@/components/tableCheckbox/index";
 
 
 export default {
-  components: { sub_, scrollPane, positionNav, tree, iframePage, marquee },
+  components: { sub_, scrollPane, positionNav, tree, iframePage, marquee, tableCheckbox },
   data() {
-    
     return {
-      activeName: "five",
+      activeName: "eight",
       print: {
         state: false,
         list: []
