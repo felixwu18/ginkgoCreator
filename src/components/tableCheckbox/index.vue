@@ -47,7 +47,7 @@
 </template>
 
 <script>
-/* 循环加递归（递归生万物），判断加标识 */
+/* 循环加递归（递归生万物），判断加标识(标识即定位) */
 export default {
   data() {
       return {
