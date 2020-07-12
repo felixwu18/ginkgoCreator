@@ -43,7 +43,7 @@
         </ul>
       </el-tab-pane>
       <el-tab-pane label="表格checkbox交互" name="eight">
-        66
+        <!-- 66 -->
         <table-checkbox />
       </el-tab-pane>
   </el-tabs>
