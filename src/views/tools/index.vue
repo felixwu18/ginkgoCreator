@@ -80,7 +80,7 @@ export default {
       // })
       // obj.novel = '已修改'
       // console.log('pre-obj-suf');
-      // console.log(obj.novel);
+      // console.log(obj.novel,'----修改后');
       
     },
     arrUnique() {

@@ -36,3 +36,17 @@ Vue.prototype.$triggerSync = (function triggerSync() {
     }, 1000)
   })
 })()
+// Object.defineProperty(Vue.prototype, '$triggerSync', {
+//   get() {
+//     return (function triggerSync() {
+//       return new Promise((resole) => {
+//         setTimeout(() => {
+//           console.log('ceshi--------------------------------')
+//           resole()
+//         }, 1000)
+//       })
+//     })()
+//   }
+// })
+
+
