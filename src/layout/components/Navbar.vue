@@ -1,5 +1,5 @@
 <template>
-   <div class="navbar">
+   <div class="navbar" style="background: red">
       navbar(预留)
    </div>
 </template>

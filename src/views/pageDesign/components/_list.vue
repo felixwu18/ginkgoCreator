@@ -17,11 +17,15 @@
     <div style="color:red; padding-top: 10px">
       data:{{requestData}}
     </div>
+    <h2 @click="handleRequest">v-model 实现双向绑定{{inputVal.val}}</h2>
+    <son v-model="inputVal.val" />
   </div>
 </template>
 
 <script>
 import { Event } from "@/utils/listen";
+import son from "./son";
+
 // import formHead from "./formHead";
 // const tableHead = [
 //   { prop: "airQuality", label: "空气质量" },
@@ -174,14 +178,17 @@ export default {
       formHeadRef: { type: Object, default: _ => {} },
       listApi: {type: Object, default: _ => ({})}
   },
-//   components: {
-//     formHead
-//   },
+  components: {
+    son
+  },
   created() {
     // this.tesFn = countLimit(2, this.ceshi)
   },
   data() {
     return {
+      inputVal: {
+        val: ''
+      },
       requestData: '',
     //   tableHead,
       tesFn: countLimit(3, this.ceshi), //data里调用函数，实现类似Method里定义一样

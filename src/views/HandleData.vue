@@ -31,7 +31,6 @@
 <script>
 import * as R from "ramda";
 import { outJs } from "@/utils/out";
-
 export default {
   data: function() {
     return {
@@ -40,11 +39,34 @@ export default {
     };
   },
   components: {},
-  created() {
+  async created() {
+    console.log('ceated---');
+    var path = this.$route.path
+    var query = this.$route.query
+    setInterval(() => {
+      var key = Date.now()
+      this.$router.replace({path, query: {
+        ...query,
+        id: key
+      }})
+    }, 2000);
+    console.log('ceated---');
   },
-  mounted: function() {},
+  async mounted() {
+    console.log('promise trigger ceshi ok------111--');
+    await this.$triggerSync
+    console.log('promise trigger ceshi ok------222 after await--');
+  },
   computed: {},
   methods: {
+    // trigger() {
+    //   return new Promise((resole) => {
+    //     setTimeout(() => {
+    //       console.log('ceshi--------------------------------')
+    //       resole()
+    //     }, 1000)
+    //   })
+    // },
     handleClick() {
       // debugger
     },

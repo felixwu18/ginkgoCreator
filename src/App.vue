@@ -15,7 +15,13 @@
 </template>
 
 <script>
+
 export default {
+  created() {
+  },
+  created() {
+    
+  },
   methods: {
     startHacking () {
       this.$notify({

@@ -26,3 +26,13 @@ new Vue({
   render: h => h(App),
   router
 })
+/* 测试异步变同步 */
+console.log(this, 'ceated stage this');
+Vue.prototype.$triggerSync = (function triggerSync() {
+  return new Promise((resole) => {
+    setTimeout(() => {
+      console.log('ceshi--------------------------------')
+      resole()
+    }, 1000)
+  })
+})()

@@ -2,7 +2,10 @@
   <el-table
     :data="tableData"
     stripe
-    style="width: 100%">
+    style="width: 100%"
+    :span-method="objectSpanMethod"
+    class="table-row"
+    >
     <el-table-column
       label="日期1"
       width="180">
@@ -10,12 +13,14 @@
             <template v-if="scope.row.aa">
                 <el-checkbox  v-for="node in scope.row.aa" :key="node.id" v-model="node.val" @change="val => handelChange(node.id, scope.row, 'aa')">{{node.label}}</el-checkbox>
             </template>
-          <el-checkbox v-else  v-model="scope.row.aa">备选项1</el-checkbox>
+          <el-checkbox v-else  v-model="scope.row.aa">备选项2</el-checkbox>
         </template>
     </el-table-column>
     <el-table-column
       label="日期2"
-      width="180">
+      width="180"
+      class="col-2"
+      >
         <template slot-scope="scope">
             <template v-if="scope.row.bb">
                 <el-checkbox  v-for="node in scope.row.bb" :key="node.id" v-model="node.val" @change="val => handelChange(node.id, scope.row, 'bb')">{{node.label}}</el-checkbox>
@@ -142,6 +147,21 @@ export default {
       }
   },
   methods: {
+    //   objectSpanMethod({ row, column, rowIndex, columnIndex }) {
+    //     if (columnIndex === 0) {
+    //        if (rowIndex % 2 === 0) {
+    //         return {
+    //             rowspan: 2,
+    //             colspan: 1
+    //           }
+    //         } else {
+    //          return {
+    //             rowspan: 0,
+    //             colspan: 0
+    //           }
+    //         }
+    //     }
+    // },
       handelChange(id, row, flag) {
           var curArr = row[flag]
         //   自当前而下 关联  
@@ -207,4 +227,33 @@ export default {
 </script>
 
 <style lang="scss">
+.table-row {
+    tr.el-table__row {
+        display: flex;
+        width: 720px;
+    }
+    td {
+        
+        height: 208px;
+        flex: 1;
+        &:nth-child(1),
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4)
+         {
+            display: flex;
+            flex-direction: row;
+            .cell {
+                display: flex;
+                flex-direction: column; 
+                flex: 1;
+                label {
+                    flex: 1;
+                    display: flex;
+                    align-items: center;
+                }
+            }
+        }
+    }
+}
 </style>
