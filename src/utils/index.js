@@ -461,3 +461,16 @@ const serialize = function(obj) {
   }
   return ary.join('&');
 }
+
+
+/**
+ * 根据编码在配置中取名称
+ * 
+ * 
+ */
+const configMap = new Map([
+  ['1', '张三'],
+  ['2', '李四'],
+  ['3', '王五']
+])
+configMap.get('1') // => '张三'
