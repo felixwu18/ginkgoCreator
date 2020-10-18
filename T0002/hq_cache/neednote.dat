@@ -18,6 +18,7 @@ SwitchADUrl=https://vip.tdx.com.cn/site/app/pc-mall/shaky.html?&version=20200904
 SwitchADUrl_Free=https://vip.tdx.com.cn/site/app/pc-mall/shaky.html?&version=202009041719&advId=21&advName=%E5%AE%98%E7%BD%91
 DownFinHQURL=abhq://calc2.tdx.com.cn:7709/
 DownFinHQURL2=abhq://calc.tdx.com.cn:7709/
+FreePopURL_QHT=http://www.tdx.com.cn/softad/freepop_qht.htm?core=##mainexe_ver##
 [Mail]
 MailContent1=通达信个人版商城 http://vip.tdx.com.cn/site/app/level2/
 MailContent2=关注通达信微博 http://weibo.com/tongdaxin
