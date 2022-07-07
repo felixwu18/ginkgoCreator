@@ -518,7 +518,7 @@ export default {
     display:inline-block;
   } */
 </style>
-<style lang="scss" soped>
+<style lang="less" soped>
 // .demo-ruleForm {
 //   /deep/ .el-input {
 //     width: 50%;

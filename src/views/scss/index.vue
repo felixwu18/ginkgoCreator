@@ -22,7 +22,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 @import "./style/index.scss";
 // 继承 & 混合 : 继承往往比混合器生成的css体积更小
 // 混合器 合理使用

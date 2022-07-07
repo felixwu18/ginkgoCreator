@@ -275,7 +275,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .about {
   color: green;
   font-size: bold;

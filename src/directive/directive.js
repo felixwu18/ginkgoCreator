@@ -16,7 +16,7 @@ const preventReClick = Vue.directive('preventReClick', {
 
 
 /**
- * @Description: 输入整数或小数的指令
+ * @Description: 2, 输入整数或小数的指令
  * @Author: Felix
  * @Date: 2020-11-06 16:33
  */

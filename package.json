@@ -5,12 +5,13 @@
   "private": true,
   "version": "0.0.1",
   "scripts": {
-    "dev": "webpack-dev-server --inline --hot --env.dev",
+    "dev": "webpack-dev-server --inline --open --hot --env.dev",
     "build": "rimraf dist && webpack -p --progress --hide-modules"
   },
   "dependencies": {
     "element-ui": "^2.3.4",
     "lodash": "^4.17.15",
+    "mri": "^1.2.0",
     "ramda": "^0.26.1",
     "sortablejs": "^1.10.2",
     "vue": "^2.5.16",

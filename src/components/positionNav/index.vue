@@ -110,7 +110,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 // .scroll-container{
 //     position: fixed;
 //     top: 209px;

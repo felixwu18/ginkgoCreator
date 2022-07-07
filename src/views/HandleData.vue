@@ -40,16 +40,17 @@ export default {
   },
   components: {},
   async created() {
+    // 测试路由刷新
     console.log('ceated---');
     var path = this.$route.path
     var query = this.$route.query
-    setInterval(() => {
-      var key = Date.now()
-      this.$router.replace({path, query: {
-        ...query,
-        id: key
-      }})
-    }, 2000);
+    // setInterval(() => {
+    //   var key = Date.now()
+    //   this.$router.replace({path, query: {
+    //     ...query,
+    //     id: key
+    //   }})
+    // }, 2000);
     console.log('ceated---');
   },
   async mounted() {
@@ -114,7 +115,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 .margin {
   margin: 0 20px 20px 230px;
 }

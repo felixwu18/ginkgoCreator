@@ -1,13 +1,13 @@
 <template lang="html">
   <div class="home com_border">
     <h2>组件优化</h2>
-  <el-tabs class="margin" v-model="activeName" @tab-click="handleClick">
+    <el-tabs class="margin" v-model="activeName" @tab-click="handleClick">
       <el-tab-pane label="组件递归" name="first">
         <!-- <sub_  :data-from-father="dataFromFather" /> -->
         <tree />
       </el-tab-pane>
       <el-tab-pane label="打印组件" name="second">
-        <print :print="print" @click="handlePrint"/>
+        <print :print="print" @click="handlePrint" />
       </el-tab-pane>
       <el-tab-pane label="目录组件" name="third">递归树</el-tab-pane>
       <el-tab-pane class="textLeft height" label="滑动小卡片" name="forth">
@@ -29,7 +29,6 @@
           </div>
         </div>
         <positionNav class="positionNav" />
-
       </el-tab-pane>
       <el-tab-pane class="textLeft height" label="iframe" name="six">
         <!-- <iframePage url="http://www.sci99.com/" />
@@ -46,7 +45,7 @@
         <!-- 66 -->
         <table-checkbox />
       </el-tab-pane>
-  </el-tabs>
+    </el-tabs>
     <!-- <p>{{msg}}</p> -->
   </div>
 </template>
@@ -63,7 +62,7 @@
 // 8.sandbox: 对iframe进行一些列限制，IE10+支持
 
 // Default SortableJS
-import Sortable from 'sortablejs';
+import Sortable from "sortablejs";
 import sub_ from "./sub_";
 import scrollPane from "@/components/scrollPane";
 import positionNav from "@/components/positionNav";
@@ -72,34 +71,42 @@ import iframePage from "@/components/iframePage";
 import marquee from "@/components/marquee";
 import tableCheckbox from "@/components/tableCheckbox/index";
 
-
 export default {
-  components: { sub_, scrollPane, positionNav, tree, iframePage, marquee, tableCheckbox },
+  components: {
+    sub_,
+    scrollPane,
+    positionNav,
+    tree,
+    iframePage,
+    marquee,
+    tableCheckbox,
+  },
   data() {
     return {
       activeName: "eight",
       print: {
         state: false,
-        list: []
+        list: [],
       },
       dataFromFather: [
         {
           title: "独孤九剑",
-          children: [{ title: "紫霞神功", children: [{ title: "冲灵剑法" }] }]
+          children: [{ title: "紫霞神功", children: [{ title: "冲灵剑法" }] }],
         },
         { title: "六脉神剑" },
-        { title: "一阳指", children: [{ title: "玄铁重剑" }] }
-      ]
+        { title: "一阳指", children: [{ title: "玄铁重剑" }] },
+      ],
     };
   },
   mounted() {
-    var el = document.getElementById('items');
-    var sortable = Sortable.create(el,
-    //  {
-    //   // delay: 80,
-    //   chosenClass: 'chosen',
-    //   scroll: true, 
-    // }
+    var el = document.getElementById("items");
+    var sortable = Sortable.create(
+      el
+      //  {
+      //   // delay: 80,
+      //   chosenClass: 'chosen',
+      //   scroll: true,
+      // }
     );
     var sortable = new Sortable(el, {
       draggable: ".item",
@@ -109,31 +116,30 @@ export default {
       //     console.log('evt.from');
 
       // },
-        // Element dragging started
-      onStart: function (/**Event*/evt) {
-          evt.oldIndex;  // element index within parent
-          debugger
+      // Element dragging started
+      onStart: function(/**Event*/ evt) {
+        evt.oldIndex; // element index within parent
+        debugger;
       },
-      onEnd: function (/**Event*/evt) {
-      // var itemEl = evt.item;  // dragged HTMLElement
-      // evt.to;    // target list
-      // evt.from;  // previous list
-      // evt.oldIndex;  // element's old index within old parent
-      // evt.newIndex;  // element's new index within new parent
-      // evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
-      // evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
-      // evt.clone // the clone element
-      // evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
-      console.log('evt.from');
-      console.log('evt.to');
-    
-  }
+      onEnd: function(/**Event*/ evt) {
+        // var itemEl = evt.item;  // dragged HTMLElement
+        // evt.to;    // target list
+        // evt.from;  // previous list
+        // evt.oldIndex;  // element's old index within old parent
+        // evt.newIndex;  // element's new index within new parent
+        // evt.oldDraggableIndex; // element's old index within old parent, only counting draggable elements
+        // evt.newDraggableIndex; // element's new index within new parent, only counting draggable elements
+        // evt.clone // the clone element
+        // evt.pullMode;  // when item is in another sortable: `"clone"` if cloning, `true` if moving
+        console.log("evt.from");
+        console.log("evt.to");
+      },
     });
     console.log(el, 1111);
   },
   props: {
     //接受上级传来的数据,先声明一个props属性接受
-    msg: String
+    msg: String,
   },
   methods: {
     handleClick(tab, event) {
@@ -142,12 +148,12 @@ export default {
     handlePrint() {
       this.print.state = true;
       this.print.list = [1, 2, 3];
-    }
-  }
+    },
+  },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="less" scoped>
 // div{
 // overflow-x:hidden;
 // overflow-y:auto;
@@ -187,6 +193,6 @@ export default {
   overflow: auto;
 }
 .chosen {
-  background: blue
+  background: blue;
 }
 </style>

@@ -3,6 +3,9 @@
     <List v-if="active.listActive" :active="active" :father="this" />
     <Mutate v-if="active.mutateActive" :active="active" :father="this" />
     <Detail v-if="active.detailActive" :active="active" :father="this" />
+    <div ref="canvasWrap" style="height: 500px; border: solid" >
+        <canvas ref="canvasRef" />
+    </div>
   </div>
 </template>
 
@@ -10,6 +13,7 @@
 import List from "./components/list";
 import Mutate from "./components/mutate";
 import Detail from "./components/detail";
+import initChart from "./mixins/initChart";
 
 // import { Event } from "@/utils/listen";
 export default {
@@ -19,6 +23,9 @@ export default {
     Mutate,
     Detail
   },
+  mixins: [
+    initChart,
+  ],
   beforeRouteLeave(to, from, next) {
     for (var i = 0; i < 2; i++) {
       i === 1 && this.trigger()(next);

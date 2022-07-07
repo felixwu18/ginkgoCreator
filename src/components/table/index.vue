@@ -623,13 +623,13 @@ export default {
       // console.log(pageSize)
   },
   mounted() {
-      setTimeout(() => {
-        this.table_top = this.$refs.dynamicTable.$el.offsetTop
-        // debugger
-        const top = this.getPageY(this.$refs.dynamicTable.$el)
-        console.log('top--')
-        console.log(top)
-      })
+      // setTimeout(() => {
+      //   this.table_top = this.$refs.dynamicTable.$el.offsetTop
+      //   // debugger
+      //   const top = this.getPageY(this.$refs.dynamicTable.$el)
+      //   console.log('top--')
+      //   console.log(top)
+      // })
     // 全局禁用tab
     document.onkeydown = function(event) {
       if (event.keyCode === 9) {

@@ -9,7 +9,11 @@ import App from './App.vue'
 import router from './router' // 因为是index.js 路径到此即可
 
 import * as utils from './utils/index'
+
 Vue.prototype.$utils = utils
+
+// 验证指令
+import directives from '@/directive/directive'
 
 // 全局注册组件
 import plugin from './plugin'
@@ -24,6 +28,7 @@ Vue.use(ElementUI)
 new Vue({
   el: '#app',
   render: h => h(App),
+  directives,
   router
 })
 /* 测试异步变同步 */
