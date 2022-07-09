@@ -1,13 +1,13 @@
 import { Message, Notification } from "element-ui";
 import { fieldsConfigure } from "./fields";
-// 失败消息的提示
+//1 失败消息的提示
 export function showError(message) {
   Message({
     showClose: true,
     message,
     type: "error",
     duration: 0,
-    offset: 260
+    offset: 260,
   });
   // Notification({
   //   showClose: true,
@@ -22,12 +22,12 @@ export function showSuccess(message) {
   Message({
     showClose: true,
     message,
-    type: "success"
+    type: "success",
   });
 }
 
 /**
- * //定义检测数据类型的功能函数
+ * //2定义检测数据类型的功能函数
     let checkedType = target => Object.prototype.toString.call(target).slice(8, -1);
  *  
  * reurn 头字符大小的类型,'String','Object','Array'......
@@ -42,30 +42,36 @@ export function isType(value = null) {
 
 export function isType2(value, type) {
   // if ((value !== 0) && !value) return false;
-  if(!type) {
+  if (!type) {
     // return value.constructor.name;
-    return Object.prototype.toString.call(value).slice(8, -1)
+    return Object.prototype.toString.call(value).slice(8, -1);
   }
-  if(type.constructor.name === 'Array') {
-    return type.includes(value.constructor.name)
+  if (type.constructor.name === "Array") {
+    return type.includes(value.constructor.name);
   } else {
     return value.constructor.name === type;
   }
 }
 /**
- * 检测两值是否相等, 用于修改,提醒调用, 返回true表示与原值不同
+ * 3 检测两值是否相等, 用于修改,提醒调用, 返回true表示与原值不同
  * @param {*} old 传入的原值
  * @param {*} now 检测现在的值
  */
 export function noSame(old, now) {
   // 数据类型不同, 或 null ,undefined
   if (isType2(old) !== isType2(now)) {
-      return true;
-  } else if(isType2(old) === isType2(now) && ["Undefined", "Null"].includes(isType2(old))) {
-    return false
+    return true;
+  } else if (
+    isType2(old) === isType2(now) &&
+    ["Undefined", "Null"].includes(isType2(old))
+  ) {
+    return false;
   }
   // 字符串, 数字, 布尔值
-  if (isType2(old, ["String", "Number", "Boolean"]) && isType2(now, ["String", "Number", "Boolean"])) {
+  if (
+    isType2(old, ["String", "Number", "Boolean"]) &&
+    isType2(now, ["String", "Number", "Boolean"])
+  ) {
     if (old !== now) {
       return true;
     }
@@ -80,7 +86,10 @@ export function noSame(old, now) {
           if (noSame(old[i], now[i])) {
             return true;
           }
-        } else if (isType2(old[i], ["String", "Number", "Boolean"]) && isType2(now[i], ["String", "Number", "Boolean"])) {
+        } else if (
+          isType2(old[i], ["String", "Number", "Boolean"]) &&
+          isType2(now[i], ["String", "Number", "Boolean"])
+        ) {
           if (old[i] !== now[i]) {
             return true;
           }
@@ -103,7 +112,7 @@ export function noSame(old, now) {
   return false;
 }
 /**
- * 查找索引index
+ * 4 查找索引index
  *  @return {Array,Sting} Obj 查找的对象
  *  @return {Object,Sting,Number} target 查找的值
  *  @return {String,Number} field 对象数组里找对象时 字段
@@ -116,12 +125,12 @@ export function getIndex(Obj, target, field) {
   } else if (isType(Obj) === "String" && isType(Obj[0]) !== "Object") {
     return Obj.indexOf(target);
   } else if (isType(Obj) === "Array" && isType(Obj[0]) === "Object") {
-    return Obj.findIndex(ele => ele[field] === target[field]);
+    return Obj.findIndex((ele) => ele[field] === target[field]);
   }
 }
 
 /**
- *  对象数组里删除对象, delete target from obj
+ *  5 对象数组里删除对象, delete target from obj
  *  @return {ObjArray} Obj 查找的对象
  *  @return {Object,objArray} target 查找的值
  *  @return {String,Number} key 对象数组里找对象时 字段, 唯一标识
@@ -144,7 +153,7 @@ export function deleteItem(Obj, target, key) {
     isType(target[0]) === "Object"
   ) {
     // 遍历待删数组
-    target.forEach(item => {
+    target.forEach((item) => {
       const index = getIndex(Obj, item, key);
       Obj.splice(index, 1);
     });
@@ -152,7 +161,7 @@ export function deleteItem(Obj, target, key) {
 }
 
 /**
- * 过滤对象数组
+ * 6 过滤对象数组
  *  @return {objArray} ObjArr 查找的对象数组
  *  @return {Sting} valInput 输入值
  *  @return {StrArray} keyMap 需要过滤的字段数组
@@ -166,7 +175,7 @@ export function filterObjArray(ObjArr, valInput, keyMap) {
 }
 // 字段过滤
 function filterItem(valInput, keyMap) {
-  return item => {
+  return (item) => {
     for (let i = 0; i < keyMap.length; i++) {
       if (
         String(item[keyMap[i]])
@@ -179,7 +188,7 @@ function filterItem(valInput, keyMap) {
   };
 }
 
-// 返回符号和字符串 默认两位小数 四舍五入
+// 7 返回符号和字符串 默认两位小数 四舍五入
 export function currency(value, currency, decimals) {
   value = parseFloat(value);
   if (!isFinite(value) || (!value && value !== 0)) return "";
@@ -190,6 +199,7 @@ export function currency(value, currency, decimals) {
 }
 
 /**
+ * 8
  * @param {HTMLElement} element
  * @param {string} className
  */
@@ -247,18 +257,18 @@ export function removeClass(ele, cls) {
 }
 
 /**
- * 对象数组去重1
+ * 9 对象数组去重1
  * Dedupes array based on criterion returned from iteratee function
  * Ex: uniqueBy([{id: 1}, {id: 1}, {id: 2}],
  *     val => val.id
  * ) = [{id: 1}, {id: 2}]
  */
- export function uniqueBy(arr, fun) {
-  const valHas = {}
- return arr.filter(ele => {
-   const val = fun(ele)
-   return !(val in valHas) && (valHas[val] = 1);
- })
+export function uniqueBy(arr, fun) {
+  const valHas = {};
+  return arr.filter((ele) => {
+    const val = fun(ele);
+    return !(val in valHas) && (valHas[val] = 1);
+  });
 }
 
 /**
@@ -278,7 +288,7 @@ export function uniqueObjArr(objArr, propStr, addProp) {
 // 合并指定字段相同对象, 指定字段值累加(暂时写死)
 function mergeRefObj(acc, obj, propStr, addProp) {
   //  var temp = acc.find(ele => obj[propStr] === ele[propStr])
-  acc.forEach(ele => {
+  acc.forEach((ele) => {
     if (obj[propStr] === ele[propStr]) {
       ele[addProp] = obj[addProp] * 1 + ele[addProp] * 1;
     }
@@ -286,6 +296,7 @@ function mergeRefObj(acc, obj, propStr, addProp) {
 }
 
 /**
+ * 10
  * 对象数组去除对象(根据字段是否有值去除对象)
  * @param {ObjArr} objArr
  * @param {string} propStr
@@ -295,7 +306,7 @@ export function removeUnexpectObj(objArr, propStr) {
   if (!objArr || !objArr.length) {
     return;
   }
-  objArr.forEach(ele => {
+  objArr.forEach((ele) => {
     if (ele[propStr]) {
       tempArr.push(ele);
     }
@@ -304,7 +315,7 @@ export function removeUnexpectObj(objArr, propStr) {
 }
 
 /**
- * 去重数组的' ', undefined, null等
+ * 11 去重数组的' ', undefined, null等
  * @param {Array} actual
  * @returns {Array}
  */
@@ -319,44 +330,61 @@ export function cleanArray(actual) {
 }
 
 /**
- * 从一个对象拷贝与另一对象同名属性的值
- * @param {Object} fromObj
- * @param {Object} toObj
+ * 12 从一个数据源对象fromObj拷贝数据到参数对象toObj里
+ * @param fromObj: Object
+ * @param toObj: Object
+ * @param flag: Function
+ * @param equalConfig: Object
  */
-export function copyPropVal(fromObj, toObj) {
-  Object.keys(toObj).forEach(ele => {
-    if (ele in fromObj && fromObj[ele]) {
-      toObj[ele] = fromObj[ele];
-    } else if (ele in fromObj && !fromObj[ele]) {
-      return;
+ export const copyPropVal = (fromObj, toObj, { flag = 0, equalConfig = {} }) => {
+  const matchFields = Object.keys(equalConfig);
+  Object.keys(toObj).forEach((field) => {
+    if (matchFields.includes(field) || fromObj.hasOwnProperty(field)) {
+      const _field = matchFields.includes(field) ? equalConfig[field] : field;
+      toObj[field] = fromObj[_field];
     } else {
-      matchFieldsVal(fromObj, toObj, ele);
+      flag === 1 && this.c(`拷贝对象中==>${field}或该字段值不存在`);
     }
   });
-}
-// fieldsConfigure[prop] 每个字段配置数组, findField 赋值
-function matchFieldsVal(fromObj, toObj, findField) {
-  for (var prop in fieldsConfigure) {
-    if (fieldsConfigure[prop].includes(findField)) {
-      for (let i = 0; i < fieldsConfigure[prop].length; i++) {
-        const field = fieldsConfigure[prop][i];
-        if (field !== findField && fromObj[field]) {
-          toObj[findField] = fromObj[field];
-          return;
-        }
-      }
-    }
-  }
-}
-/**
- * @param {Array} arr
- * @returns {Array}
- */
-export function uniqueArr(arr) {
-  return Array.from(new Set(arr));
-}
+  return toObj;
+};
+// /**
+//  * 13 @param {Array} arr
+//  * @returns {Array}
+//  */
+// export function uniqueArr(arr) {
+//   return Array.from(new Set(arr));
+// }
 
 /**
+ * 13 统一处理API响应的方法
+ * @param req: Object - Promise
+ * @param success: Function
+ * @param fail: Function
+ * @param successTip: any
+ */
+ export const response = async ({ req, success, fail, successTip }) => {
+  try {
+    const res = await req;
+    if (res && res.status === 200) {
+      if (successTip) {
+        showSuccess(successTip);
+      }
+      typeof success === 'function' && success(res.data || {});
+    } else {
+      if (fail && typeof fail === 'function') {
+        fail(res.message);
+      } else {
+        showError(res.message || '请求异常');
+      }
+    }
+  } catch (error) {
+    console.error(error, '<=== error');
+  }
+};
+
+/**
+ * 14
  * This is just a simple version of deep copy
  * Has a lot of edge cases bug
  * If you want to use a perfect deep copy, use lodash's _.cloneDeep
@@ -368,7 +396,7 @@ export function deepClone(source) {
     throw new Error("error arguments", "deepClone");
   }
   const targetObj = source.constructor === Array ? [] : {};
-  Object.keys(source).forEach(keys => {
+  Object.keys(source).forEach((keys) => {
     if (source[keys] && typeof source[keys] === "object") {
       targetObj[keys] = deepClone(source[keys]);
     } else {
@@ -416,7 +444,7 @@ export function deepClone(source) {
 // };
 
 /**
- * 存储对象的封装
+ * 15 存储对象的封装
  * @param {String} key
  * @param {Array, Object, Number, String} value
  * @param {String} storeName(sessionStorage or localStorage)
@@ -440,52 +468,71 @@ export const handleSave = (function() {
   }
   return {
     get,
-    set
+    set,
   };
 })();
 
-// 封装优化if-else
+// 16 封装优化if-else
 /**
  * 带变量的条件，执行判断，返回值
- * @param {arrObj} config 
+ * @param {arrObj} config
  * config = [{case:`${a} < 6`, back: 'a变量的值小于6'},...]
  */
 export function caseMapTo(config) {
-  if(!config) {
-   return
- }   
- for(let i = 0;i < config.length;i++){
-  if(eval(config[i].case)) {
-    return config[i].back
+  if (!config) {
+    return;
   }
- }
+  for (let i = 0; i < config.length; i++) {
+    if (eval(config[i].case)) {
+      return config[i].back;
+    }
+  }
 }
 
 /**
- * 带变量的条件，执行判断，返回值
- * @param {Object} obj 
+ * 17 带变量的条件，执行判断，返回值
+ * @param {Object} obj
  * {index: 1, size: 5} => index=1&size=5
  */
 
 const serialize = function(obj) {
-  var ary = []
+  var ary = [];
   for (var p in obj) {
     if (obj.hasOwnProperty(p) && obj[p]) {
-        ary.push(encodeURIComponent(p) + '=' + encodeURIComponent(obj[p]))
+      ary.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
     }
   }
-  return ary.join('&');
-}
-
+  return ary.join("&");
+};
 
 /**
- * 根据编码在配置中取名称
- * 
- * 
+ * 18 根据编码在配置中取名称
+ * Map 接二维数组时
+ *
+ *
  */
 const configMap = new Map([
-  ['1', '张三'],
-  ['2', '李四'],
-  ['3', '王五']
-])
-configMap.get('1') // => '张三'
+  ["1", "张三"],
+  ["2", "李四"],
+  ["3", "王五"],
+]);
+configMap.get("1"); // => '张三'
+
+/**
+ * 19 复制单行内容到粘贴板
+ * content : 需要复制的内容
+ * message : 复制完后的提示，不传则默认提示"复制成功"
+ * */
+function copyToClip(content, message) {
+  var aux = document.createElement("input");
+  aux.setAttribute("value", content);
+  document.body.appendChild(aux);
+  aux.select();
+  document.execCommand("copy");
+  document.body.removeChild(aux);
+  if (message == null) {
+    showSuccess("复制成功");
+  } else {
+    showSuccess(message);
+  }
+}
