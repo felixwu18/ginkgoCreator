@@ -32,7 +32,7 @@
 import * as R from "ramda";
 import { outJs } from "@/utils/out";
 export default {
-  data: function() {
+  data: function () {
     return {
       R,
       activeName: "third",
@@ -41,9 +41,9 @@ export default {
   components: {},
   async created() {
     // 测试路由刷新
-    console.log('ceated---');
-    var path = this.$route.path
-    var query = this.$route.query
+    console.log("ceated---");
+    var path = this.$route.path;
+    var query = this.$route.query;
     // setInterval(() => {
     //   var key = Date.now()
     //   this.$router.replace({path, query: {
@@ -51,12 +51,12 @@ export default {
     //     id: key
     //   }})
     // }, 2000);
-    console.log('ceated---');
+    console.log("ceated---");
   },
   async mounted() {
-    console.log('promise trigger ceshi ok------111--');
-    await this.$triggerSync
-    console.log('promise trigger ceshi ok------222 after await--');
+    console.log("promise trigger ceshi ok------111--");
+    await this.$triggerSync;
+    console.log("promise trigger ceshi ok------222 after await--");
   },
   computed: {},
   methods: {
@@ -73,26 +73,30 @@ export default {
     },
     // 方法二使用了throw new Error()阻断js
     beforeLeave(item) {
-      return this.$confirm('离开将不保存本页修改', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
+      if (this.activeName !== "first") return;
+      return this.$confirm("离开将不保存本页修改", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning",
       })
-      .then(() => {
-      })
-      .catch(() => {
-        throw new Error('取消成功！')
-      })
+        .then(() => {})
+        .catch(() => {
+          throw new Error("取消成功！");
+        });
     },
     handleOuterJs() {
-      outJs.call(this, this.test)
+      outJs.call(this, this.test);
     },
     handle_If_else() {
       // 配合es6的${}，js代码编写在字符串里,厉害
-      const age = 29
-      const config =[{case: `${age} < 17`, back: '你不到18岁'},{case: `${age} > 18 && ${age} < 30` , back: '你已满18，使劲嗨'}, {case: `${age} >= 30` , back: '已到而立，加油便是'}]
-      const tip = this.$utils.caseMapTo(config)
-      console.log('caseMapTo--', tip)
+      const age = 29;
+      const config = [
+        { case: `${age} < 17`, back: "你不到18岁" },
+        { case: `${age} > 18 && ${age} < 30`, back: "你已满18，使劲嗨" },
+        { case: `${age} >= 30`, back: "已到而立，加油便是" },
+      ];
+      const tip = this.$utils.caseMapTo(config);
+      console.log("caseMapTo--", tip);
     },
     test() {
       // const {identity} = R
@@ -104,14 +108,14 @@ export default {
       const people = [
         { name: "Emma", age: 70 },
         { name: "Peter", age: 78 },
-        { name: "Mikhail", age: 62 }
+        { name: "Mikhail", age: 62 },
       ];
       const peopleByOldestFirst = R.sort(byAge, people);
       console.log("people---peopleByOldestFirst");
       console.log(people);
       console.log(peopleByOldestFirst);
-    }
-  }
+    },
+  },
 };
 </script>
 

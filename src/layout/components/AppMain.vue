@@ -1,17 +1,16 @@
 <template>
-   <section  class="app-main">
-      app-main welcome!
-     <transition name="fade-transform" mode="out-in">
-       <keep-alive>
+  <section class="app-main">
+    app-main welcome!
+    <transition name="fade-transform" mode="out-in">
+      <keep-alive>
         <router-view msg="我是通过<router-view>传递的数据,上级传给我的" />
-       </keep-alive>
+      </keep-alive>
     </transition>
-   </section>
+  </section>
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>
 
 <style lang="less" scoped>
@@ -21,9 +20,10 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
+  margin-top: 50px;
 }
 
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 
@@ -33,7 +33,7 @@ export default {
     min-height: calc(100vh - 84px);
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 84px;
   }
 }
@@ -46,5 +46,4 @@ export default {
     padding-right: 15px;
   }
 }
-
 </style>

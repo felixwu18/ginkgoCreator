@@ -1,33 +1,31 @@
 <template>
-   <div class="navbar" style="background: red">
-      navbar(预留)
-   </div>
+  <div class="navbar" style="background: red">navbar(预留)</div>
 </template>
 
 <script>
-export default {
-};
+export default {};
 </script>
 
 <style lang="less" scoped>
-
- .navbar {
+.navbar {
   height: 50px;
   overflow: hidden;
-  position: relative;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
   background: #fff;
-  box-shadow: 0 1px 4px rgba(0,21,41,.08);
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
 
   .hamburger-container {
     line-height: 46px;
     height: 100%;
     float: left;
     cursor: pointer;
-    transition: background .3s;
-    -webkit-tap-highlight-color:transparent;
+    transition: background 0.3s;
+    -webkit-tap-highlight-color: transparent;
 
     &:hover {
-      background: rgba(0, 0, 0, .025)
+      background: rgba(0, 0, 0, 0.025);
     }
   }
 
@@ -59,10 +57,10 @@ export default {
 
       &.hover-effect {
         cursor: pointer;
-        transition: background .3s;
+        transition: background 0.3s;
 
         &:hover {
-          background: rgba(0, 0, 0, .025)
+          background: rgba(0, 0, 0, 0.025);
         }
       }
     }
@@ -92,5 +90,4 @@ export default {
     }
   }
 }
-
 </style>
