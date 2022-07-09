@@ -336,7 +336,7 @@ export function cleanArray(actual) {
  * @param flag: Function
  * @param equalConfig: Object
  */
- export const copyPropVal = (fromObj, toObj, { flag = 0, equalConfig = {} }) => {
+export const copyPropVal = (fromObj, toObj, { flag = 0, equalConfig = {} }) => {
   const matchFields = Object.keys(equalConfig);
   Object.keys(toObj).forEach((field) => {
     if (matchFields.includes(field) || fromObj.hasOwnProperty(field)) {
@@ -363,23 +363,23 @@ export function cleanArray(actual) {
  * @param fail: Function
  * @param successTip: any
  */
- export const response = async ({ req, success, fail, successTip }) => {
+export const response = async ({ req, success, fail, successTip }) => {
   try {
     const res = await req;
     if (res && res.status === 200) {
       if (successTip) {
         showSuccess(successTip);
       }
-      typeof success === 'function' && success(res.data || {});
+      typeof success === "function" && success(res.data || {});
     } else {
-      if (fail && typeof fail === 'function') {
+      if (fail && typeof fail === "function") {
         fail(res.message);
       } else {
-        showError(res.message || '请求异常');
+        showError(res.message || "请求异常");
       }
     }
   } catch (error) {
-    console.error(error, '<=== error');
+    console.error(error, "<=== error");
   }
 };
 
@@ -520,10 +520,10 @@ configMap.get("1"); // => '张三'
 
 /**
  * 19 复制单行内容到粘贴板
- * content : 需要复制的内容
+ * content : 需要复制的内容 - input
  * message : 复制完后的提示，不传则默认提示"复制成功"
  * */
-function copyToClip(content, message) {
+export function copyToClip(content, message) {
   var aux = document.createElement("input");
   aux.setAttribute("value", content);
   document.body.appendChild(aux);
@@ -534,5 +534,30 @@ function copyToClip(content, message) {
     showSuccess("复制成功");
   } else {
     showSuccess(message);
+  }
+}
+
+/**
+ * 复制多行内容到粘贴板
+ * contentArray: 需要复制的内容（传一个字符串数组）- textarea
+ * message : 复制完后的提示，不传则默认提示"复制成功"
+ * */
+function copyToClip(contentArray, message) {
+  var contents = "";
+  for (var i = 0; i < contentArray.length; i++) {
+    contents += contentArray[i] + "\n";
+  }
+  const textarea = document.createElement("textarea");
+  textarea.value = contents;
+  document.body.appendChild(textarea);
+  textarea.select();
+  if (document.execCommand("copy")) {
+    document.execCommand("copy");
+  }
+  document.body.removeChild(textarea);
+  if (message == null) {
+    alert("复制成功");
+  } else {
+    alert(message);
   }
 }

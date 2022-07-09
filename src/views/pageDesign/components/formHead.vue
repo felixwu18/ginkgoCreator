@@ -1,9 +1,13 @@
 <template>
   <div>
     formhead
-    <el-input v-model="search.name" />
+    <el-input ref="outStr" v-model="search.name" clearable />
+    <el-input type="textarea" ref="outStr2" v-model="search.name" />
     <el-button @click="outReplaceStr">obj配置输出替换字符</el-button><br />
-    <span>{{ outStr }}</span>
+    <el-input ref="outStr3" v-model="outStr"></el-input
+    ><el-button style="margin-left: 10px" type="primary" @click="copy"
+      >复制</el-button
+    ><br />
   </div>
 </template>
 
@@ -22,10 +26,9 @@ export default {
   },
   methods: {
     outReplaceStr() {
-      const aaa = { a: 1, b: 2 };
-      //       sed系列 -- 替换字符串
+      // sed系列 -- 替换字符串
       // sed -i s/"a"/"A"/g aa.txt
-      // sed -i 's/\<ff11\>/field1/; s/\<ff22\>/field2/; s/\<ff33\>/field3/' index.html 精确匹配
+      // sed -i 's/\<ff11\>/field1/; s/\<ff22\>/field2/; s/\<ff33\>/field3/' index.html // => 精确匹配
       const obj = eval(`(${this.search.name})`);
       console.log(typeof obj, "<=== 111111-obj");
       const outStr = Object.entries(obj).reduce(
@@ -35,6 +38,11 @@ export default {
       this.outStr = outStr;
       console.log(outStr, "<=== replaceStr");
       console.log(typeof outStr, "<=== replaceStr");
+    },
+    copy() {
+      this.$refs.outStr3.select();
+      document.execCommand("copy");
+      this.$utils.showSuccess("复制成功！");
     },
   },
 };
