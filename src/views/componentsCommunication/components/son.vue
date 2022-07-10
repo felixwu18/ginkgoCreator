@@ -1,44 +1,34 @@
 <template>
-  <div
-   style="padding-top:24px"
-   v-bind="$attrs"
-   >
-      son
-     <el-button @click="ceshi">son按钮触发</el-button> <br>
-      <p>$attrs: {{$attrs}}</p>
-      <p>$listeners: {{$listeners}}</p>
+  <div style="padding-top: 24px" v-bind="$attrs">
+    son
+    <el-button @click="ceshi">son按钮触发</el-button> <br />
+    <p>$attrs: {{ $attrs }}</p>
+    <p>$listeners: {{ $listeners }}</p>
   </div>
 </template>
 
 <script>
-
 export default {
-  components: {
-  },
+  components: {},
   inheritAttrs: false,
-  props: ['yes'],
+  props: ["yes"],
   data() {
-    var classNma = 'none'
-      return {
-        form: {},
-        dialogFormVisible: false,
-        formLabelWidth: '120px',
-        classNma,
-        son: {          
-          },
-      }
+    var classNma = "none";
+    return {
+      form: {},
+      dialogFormVisible: false,
+      formLabelWidth: "120px",
+      classNma,
+      son: {},
+    };
   },
-  created() {
-  },
-  computed: {
-  },
+  created() {},
+  computed: {},
   methods: {
-     ceshi() {
-         console.log('ceshi---son')
-         this
-         debugger
-     }
-  }
+    ceshi() {
+      console.log("ceshi---son");
+    },
+  },
 };
 </script>
 

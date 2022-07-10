@@ -117,11 +117,10 @@ export default {
 
       // },
       // Element dragging started
-      onStart: function(/**Event*/ evt) {
+      onStart: function (/**Event*/ evt) {
         evt.oldIndex; // element index within parent
-        debugger;
       },
-      onEnd: function(/**Event*/ evt) {
+      onEnd: function (/**Event*/ evt) {
         // var itemEl = evt.item;  // dragged HTMLElement
         // evt.to;    // target list
         // evt.from;  // previous list
@@ -160,10 +159,10 @@ export default {
 // max-height:100%;
 // }
 
-@import "~@/views/scss/style/variables";
-@import "~@/views/scss/style/common";
+// @import "~@/views/scss/style/variables";
+// @import "~@/views/scss/style/common";
 .home {
-  color: $color-blue;
+  // color: $color-blue;
   & /deep/ .el-tab-pane {
     border: 1px solid #aaa;
   }
