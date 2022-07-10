@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "element-ui": "^2.3.4",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mri": "^1.2.0",
     "ramda": "^0.26.1",
     "sortablejs": "^1.10.2",
